@@ -1,0 +1,79 @@
+[
+ {
+  "name": "car-4",
+  "seed": 101,
+  "w": 768,
+  "h": 448,
+  "prompt": "photo of a spotless white modern compact sedan parked still on a quiet seaside promenade in Nha Trang Vietnam, three-quarter front view, palm trees and turquoise sea behind, bright daylight, crisp and sharp, editorial travel photography, golden hour, sharp focus, highly detailed, 35mm, no text"
+ },
+ {
+  "name": "dest-dalat",
+  "seed": 202,
+  "w": 640,
+  "h": 448,
+  "prompt": "photo of Da Lat Vietnam at dawn, pine forest hills in soft fog, Xuan Huong lake reflecting pastel pink sky, a small pink church spire in the distance, editorial travel photography, golden hour, sharp focus, highly detailed, 35mm, no text"
+ },
+ {
+  "name": "dest-phanrang",
+  "seed": 101,
+  "w": 640,
+  "h": 448,
+  "prompt": "photo of ancient red brick Cham towers on a sunlit hill in Phan Rang Ninh Thuan Vietnam, deep blue sky, dry golden landscape, grapevine rows in the foreground, hot afternoon light, editorial travel photography, golden hour, sharp focus, highly detailed, 35mm, no text"
+ },
+ {
+  "name": "dest-tuyhoa",
+  "seed": 202,
+  "w": 640,
+  "h": 448,
+  "prompt": "photo of an ancient Cham tower on a green hill above Tuy Hoa city Phu Yen Vietnam, river bridge and coastline in the background, clear bright day, editorial travel photography, golden hour, sharp focus, highly detailed, 35mm, no text"
+ },
+ {
+  "name": "dest-phanthiet",
+  "seed": 101,
+  "w": 640,
+  "h": 448,
+  "prompt": "photo of red sand dunes of Mui Ne Phan Thiet Vietnam at sunset, rippled orange sand, sea in the distance, a round bamboo basket boat on the shore, warm dramatic light, editorial travel photography, golden hour, sharp focus, highly detailed, 35mm, no text"
+ },
+ {
+  "name": "dest-quynhon",
+  "seed": 101,
+  "w": 640,
+  "h": 448,
+  "prompt": "aerial photo of Eo Gio rocky coastline near Quy Nhon Vietnam, waves on dark cliffs, curved white sand beach and emerald sea, sunny day, editorial travel photography, golden hour, sharp focus, highly detailed, 35mm, no text"
+ },
+ {
+  "name": "dest-vungtau",
+  "seed": 202,
+  "w": 640,
+  "h": 448,
+  "prompt": "photo of the giant white Christ statue with open arms on a green mountain above Vung Tau beach Vietnam, long sandy beach, warm late afternoon light, editorial travel photography, golden hour, sharp focus, highly detailed, 35mm, no text"
+ },
+ {
+  "name": "dest-saigon",
+  "seed": 101,
+  "w": 640,
+  "h": 448,
+  "prompt": "photo of Ho Chi Minh City skyline at blue hour from across the Saigon river, Landmark 81 tower lit up, city lights reflecting on the water, warm orange horizon, editorial travel photography, golden hour, sharp focus, highly detailed, 35mm, no text"
+ },
+ {
+  "name": "hero",
+  "seed": 303,
+  "w": 768,
+  "h": 448,
+  "prompt": "photo of a single white SUV car driving along a scenic winding coastal road beside turquoise sea and white sand beach in Nha Trang Vietnam, green mountains ahead, wide cinematic landscape, morning light, editorial travel photography, golden hour, sharp focus, highly detailed, 35mm, no text"
+ },
+ {
+  "name": "car-7",
+  "seed": 404,
+  "w": 768,
+  "h": 448,
+  "prompt": "photo of a spotless white modern 7-seater SUV crossover family car parked still at a mountain pass viewpoint road in Vietnam, three-quarter front view, pine trees and misty hills behind, soft morning light, crisp and sharp, editorial travel photography, golden hour, sharp focus, highly detailed, 35mm, no text"
+ },
+ {
+  "name": "dest-camranh",
+  "seed": 303,
+  "w": 640,
+  "h": 448,
+  "prompt": "photo of a white passenger airplane landing low over a turquoise bay towards Cam Ranh airport runway Vietnam, palm trees and beach, bright blue sky, travel photography, editorial travel photography, golden hour, sharp focus, highly detailed, 35mm, no text"
+ }
+]

@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bảng giá xe dịch vụ Nha Trang đi Đà Lạt, Cam Ranh, Phan Rang, Sài Gòn — Thiên Phú Travel</title>
+<meta name="description" content="Giá trọn xe 4 chỗ và 7 chỗ từ Nha Trang: Đà Lạt 900.000, sân bay Cam Ranh 300.000, Phan Rang 850.000, Phan Thiết 1.300.000, Quy Nhơn 2.000.000, Sài Gòn 2.500.000. Đã gồm xăng, cầu đường, tài xế.">
+<meta name="theme-color" content="#F4F7F8">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Bảng giá xe dịch vụ Nha Trang đi Đà Lạt, Cam Ranh, Phan Rang, Sài Gòn — Thiên Phú Travel">
+<meta property="og:description" content="Giá trọn xe 4 chỗ và 7 chỗ từ Nha Trang: Đà Lạt 900.000, sân bay Cam Ranh 300.000, Phan Rang 850.000, Phan Thiết 1.300.000, Quy Nhơn 2.000.000, Sài Gòn 2.500.000. Đã gồm xăng, cầu đường, tài xế.">
+<meta property="og:image" content="img/hero.jpg">
+<meta property="og:locale" content="vi_VN">
+<link rel="canonical" href="bang-gia.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%230A3D55'/%3E%3Cpath d='M8 23c4-9 9-13 18-13 3 0 6 1 7 2-2 5-7 9-13 9H8z' fill='%2362C3D6'/%3E%3Cpath d='M8 23h22c0 4-2 6-6 6H14c-4 0-6-2-6-6z' fill='%23F6B73C'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Be+Vietnam+Pro:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+<a class="skip" href="#noi-dung">Bỏ qua tới nội dung</a>
+<div class="grain" aria-hidden="true"></div>
+<canvas class="snow" id="snow" aria-hidden="true"></canvas>
+<div class="ambient" aria-hidden="true"></div>
+
+<div id="siteHeader"></div>
+
+<main id="noi-dung">
+
+<section class="phero phero--solo" aria-labelledby="pageTitle">
+  <div class="wrap phero__grid">
+    <div class="phero__copy">
+      <p class="tag intro intro--1">Bảng giá</p>
+      <h1 id="pageTitle" class="split" data-split>Giá trọn xe, một chiều, công khai cho tám tuyến.</h1>
+      <p class="phero__lede intro intro--3">Đây là giá cho cả xe, không phải giá mỗi người. Đã gồm xăng, phí cầu đường và tài xế.</p>
+      <div class="phero__actions intro intro--4"><a class="btn btn--sun btn--lg" href="tel:+84964559794"><span>Gọi 0964 559 794</span><span class="btn__ic" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M5 3h3l1.5 4-2 1.2a9 9 0 0 0 4.3 4.3L13 10.5l4 1.5v3a2 2 0 0 1-2 2A13 13 0 0 1 3 5a2 2 0 0 1 2-2Z" fill="currentColor"/></svg></span></a><a class="btn btn--line btn--lg" href="dat-xe.html"><span>Gửi yêu cầu báo giá</span><span class="btn__ic" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 12 4M6 4h6v6"/></svg></span></a></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--tight" id="bang-gia" aria-labelledby="priceTitle">
+  <div class="wrap">
+    <div class="sec__head rv">
+      <h2 id="priceTitle" data-split-scroll>Bảng giá xe 4 chỗ và 7 chỗ</h2>
+      <p>Áp dụng ngày thường. Lễ, Tết hoặc chạy đêm sau 22 giờ gọi để chốt giá chính xác.</p>
+    </div>
+    <div class="ledger bezel rv">
+      <div class="core">
+        <table class="ledger__table">
+          <caption class="sr-only">Bảng giá xe Thiên Phú Travel theo tuyến và loại xe</caption>
+          <thead><tr><th scope="col">Nha Trang đi</th><th scope="col">Quãng đường</th><th scope="col">Xe 4 chỗ</th><th scope="col">Xe 7 chỗ</th></tr></thead>
+          <tbody id="priceBody"></tbody>
+          <tfoot><tr><td>Xe 16 chỗ<small>mọi tuyến</small></td><td></td><td class="num num--na" colspan="2">Báo giá theo đoàn và lịch trình</td></tr></tfoot>
+        </table>
+        <div class="ledger__foot">
+          <p>Khứ hồi trong ngày, đi nhiều điểm hoặc xe 16 chỗ: báo giá riêng, thường rẻ hơn cộng từng chặng.</p>
+          <a class="btn btn--sun " href="tel:+84964559794"><span>Gọi 0964 559 794</span><span class="btn__ic" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M5 3h3l1.5 4-2 1.2a9 9 0 0 0 4.3 4.3L13 10.5l4 1.5v3a2 2 0 0 1-2 2A13 13 0 0 1 3 5a2 2 0 0 1 2-2Z" fill="currentColor"/></svg></span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--tint" id="gia-gom" aria-labelledby="inclTitle">
+  <div class="wrap">
+    <div class="sec__head rv">
+      <h2 id="inclTitle" data-split-scroll>Giá gồm gì, chưa gồm gì</h2>
+    </div>
+    <div class="incl">
+      <div class="bezel rv"><div class="core">
+        <h3>Đã gồm trong giá</h3>
+        <ul>
+          <li>Xăng dầu cho cả chuyến</li>
+          <li>Phí cầu đường, cao tốc</li>
+          <li>Tài xế và tiền ăn của tài xế</li>
+          <li>Nước suối, khăn lạnh trên xe</li>
+          <li>Chờ máy bay trễ khi đón sân bay</li>
+          <li>Dừng chụp hình, ghé mua đặc sản dọc đường</li>
+        </ul>
+      </div></div>
+      <div class="bezel incl--no rv"><div class="core">
+        <h3>Chưa gồm, bạn tự trả nếu có</h3>
+        <ul>
+          <li>Vé tham quan, phí vào cổng điểm du lịch</li>
+          <li>Phí gửi xe tại điểm bạn yêu cầu dừng lâu</li>
+          <li>Phụ thu lễ, Tết: báo trước khi chốt</li>
+          <li>Chạy thêm điểm ngoài lộ trình đã chốt</li>
+          <li>Phòng nghỉ tài xế khi đi nhiều ngày</li>
+        </ul>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+
+<section class="sec" aria-labelledby="ctaTitle">
+  <div class="wrap">
+    <div class="cta bezel bezel--deep rv">
+      <div class="core">
+        <div><h2 id="ctaTitle" data-split-scroll>Tuyến của bạn chưa có trong bảng?</h2><p>Khứ hồi, đi nhiều điểm, xe 16 chỗ hay tuyến khác: gửi lịch trình, Thiên Phú báo giá trong 10 phút.</p></div>
+        <div class="cta__actions"><a class="btn btn--sun btn--lg" href="tel:+84964559794"><span>Gọi 0964 559 794</span><span class="btn__ic" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M5 3h3l1.5 4-2 1.2a9 9 0 0 0 4.3 4.3L13 10.5l4 1.5v3a2 2 0 0 1-2 2A13 13 0 0 1 3 5a2 2 0 0 1 2-2Z" fill="currentColor"/></svg></span></a><a class="btn btn--line btn--lg" href="dat-xe.html"><span>Gửi yêu cầu báo giá</span><span class="btn__ic" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 12 4M6 4h6v6"/></svg></span></a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div id="siteFooter"></div>
+<div id="siteDock"></div>
+
+<script src="js/content.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/app.js"></script>
+<script src="js/effects.js"></script>
+</body>
+</html>

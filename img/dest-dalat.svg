@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 280" role="img" aria-label="Đà Lạt">
+  <defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f6d6e4"/><stop offset="1" stop-color="#fbeedd"/></linearGradient>
+  <linearGradient id="fog" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff" stop-opacity=".8"/></linearGradient></defs>
+  <rect width="400" height="280" fill="url(#sky)"/>
+  <circle cx="310" cy="70" r="26" fill="#f6b73c" opacity=".9"/>
+  <path d="M0 150c60-40 110-50 170-30s120 10 230-30v100H0z" fill="#9fb8b0"/>
+  <path d="M0 180c70-30 130-30 200-10s120-10 200-40v100H0z" fill="#5f8f7c"/>
+  <g fill="#2e6b52">
+    <path d="M40 200l18-50 18 50zM70 205l16-44 16 44zM300 200l20-60 20 60zM340 205l16-42 16 42zM120 210l14-38 14 38zM250 208l16-44 16 44z"/>
+  </g>
+  <path d="M186 120l12-36 12 36h-6v40h-12v-40z" fill="#c98468"/><rect x="178" y="150" width="40" height="26" fill="#e9c7a4" stroke="#8a5a3c"/>
+  <path d="M0 200h400v80H0z" fill="#6fb7c6"/>
+  <path d="M0 196c80 10 160 10 240 0s120-8 160 0v12H0z" fill="#8cc9d6"/>
+  <rect y="150" width="400" height="80" fill="url(#fog)"/>
+</svg>

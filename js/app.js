@@ -1,570 +1,321 @@
 /* ==========================================================================
-   app.js — Dựng nội dung từ content.js, xử lý form đặt xe và animation.
-   Không cần sửa file này khi chỉ muốn đổi nội dung.
+   app.js — Thiên Phú Travel. Đọc dữ liệu từ content.js, dựng các khối
+   động (xe, điểm đến, bảng giá, giá trị, đánh giá, hỏi đáp) và xử lý
+   ô báo giá tức thì + form yêu cầu báo giá.
    ========================================================================== */
 (function () {
   "use strict";
+  var C = window.TP_CONTENT;
+  if (!C) { return; }
 
-  var C = window.XDV_CONTENT || {};
-  var $  = function (s, r) { return (r || document).querySelector(s); };
+  var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
 
-  /* Định dạng 3300000 → "3.300.000₫" */
-  function vnd(n) {
-    return Number(n).toLocaleString("vi-VN") + "₫";
-  }
+  /** Định dạng số VND kiểu 1.100.000 ₫ */
+  function vnd(n) { return n.toLocaleString("vi-VN") + " ₫"; }
 
-  /* Định dạng 3300000 → "3,3 triệu" (dùng cho phần tóm tắt nhanh) */
-  function trieu(n) {
-    var t = n / 1000000;
-    return (Math.round(t * 10) / 10).toLocaleString("vi-VN") + " triệu";
-  }
-
-  /* Chống chèn HTML từ dữ liệu */
+  /** Thoát ký tự HTML trước khi chèn chuỗi vào innerHTML */
   function esc(s) {
-    return String(s == null ? "" : s)
-      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
-  }
-
-  function el(html) {
-    var t = document.createElement("template");
-    t.innerHTML = html.trim();
-    return t.content.firstElementChild;
-  }
-
-  /* =====================================================================
-     1. TUYẾN NGẮN Ở HERO
-     ===================================================================== */
-  function renderHeroRoutes() {
-    var host = $("#heroRoutes");
-    if (!host || !C.routes) return;
-    host.innerHTML = "";
-    C.routes.forEach(function (r) {
-      host.appendChild(el(
-        '<li>' +
-          '<span class="route-list__path">' + esc(r.from) + ' <i aria-hidden="true">→</i> ' + esc(r.to) + '</span>' +
-          '<span class="route-list__price">từ ' + esc(trieu(r.price[4])) + '</span>' +
-        '</li>'
-      ));
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
     });
   }
 
-  /* =====================================================================
-     2. GRID TUYẾN ĐƯỜNG
-     ===================================================================== */
-  function renderRouteGrid() {
-    var host = $("#routeGrid");
-    if (!host || !C.routes) return;
-    host.innerHTML = "";
-
-    var list = C.routes.slice().sort(function (a, b) {
-      return (b.featured ? 1 : 0) - (a.featured ? 1 : 0);
-    });
-
-    list.forEach(function (r) {
-      var times = r.depart.map(function (t) {
-        return '<span class="time">' + esc(t) + '</span>';
-      }).join("");
-
-      var card = el(
-        '<article class="route rv">' +
-          '<div class="shell"><div class="core">' +
-            '<header class="route__head">' +
-              '<h3>' + esc(r.from) + ' <i aria-hidden="true">→</i> ' + esc(r.to) + '</h3>' +
-              (r.featured ? '<span class="route__flag">Khách đi nhiều</span>' : '') +
-            '</header>' +
-            '<p class="route__note">' + esc(r.note) + '</p>' +
-            '<dl class="route__specs">' +
-              '<div><dt>Quãng đường</dt><dd>' + esc(r.km) + ' km</dd></div>' +
-              '<div><dt>Thời gian</dt><dd>' + esc(r.duration) + '</dd></div>' +
-              '<div><dt>Khởi hành</dt><dd class="times">' + times + '</dd></div>' +
-            '</dl>' +
-            '<footer class="route__foot">' +
-              '<span class="route__from"><small>Giá từ</small><b>' + esc(vnd(r.price[4])) + '</b></span>' +
-              '<button class="btn btn--sm" type="button" data-book="' + esc(r.id) + '">' +
-                '<span>Đặt tuyến này</span>' +
-                '<span class="btn__ic" aria-hidden="true">' +
-                  '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 12 4M6 4h6v6"/></svg>' +
-                '</span>' +
-              '</button>' +
-            '</footer>' +
-          '</div></div>' +
-        '</article>'
-      );
-      host.appendChild(card);
-    });
+  /** Thẻ <img>: ưu tiên ảnh JPG, lỗi thì tự chuyển sang SVG tạm. */
+  function photoTag(item, alt, w, h) {
+    var fallback = item.img
+      ? ' data-fallback="' + esc(item.img) + '" onerror="this.onerror=null;this.src=this.dataset.fallback"'
+      : ' onerror="this.remove()"';
+    return '<img src="' + esc(item.photo || item.img) + '" alt="' + alt + '" width="' + w + '" height="' + h + '"' + fallback + '>';
   }
 
-  /* =====================================================================
-     3. BẢNG GIÁ
-     ===================================================================== */
-  function renderPriceTable() {
-    var host = $("#priceBody");
-    if (!host || !C.routes) return;
-    host.innerHTML = "";
-    C.routes.forEach(function (r) {
-      var tr = el(
-        '<tr>' +
-          '<th scope="row">' +
-            '<span class="price__route">' + esc(r.from) + ' → ' + esc(r.to) + '</span>' +
-            '<span class="price__meta">' + esc(r.km) + ' km · ' + esc(r.duration) + '</span>' +
-          '</th>' +
-          '<td data-car="4">' + esc(vnd(r.price[4])) + '</td>' +
-          '<td data-car="7">' + esc(vnd(r.price[7])) + '</td>' +
-          '<td data-car="16">' + esc(vnd(r.price[16])) + '</td>' +
-        '</tr>'
-      );
-      host.appendChild(tr);
-    });
-  }
-
-  /* =====================================================================
-     4. ĐÁNH GIÁ
-     ===================================================================== */
-  function renderQuotes() {
-    var host = $("#quoteGrid");
-    if (!host || !C.quotes) return;
-    host.innerHTML = "";
-    C.quotes.forEach(function (q) {
-      host.appendChild(el(
-        '<figure class="quote rv">' +
-          '<div class="shell"><div class="core">' +
-            '<span class="quote__mark" aria-hidden="true">&#8220;</span>' +
-            '<blockquote>' + esc(q.text) + '</blockquote>' +
-            '<figcaption>' +
-              '<span class="quote__av" aria-hidden="true">' + esc(q.initial) + '</span>' +
-              '<span class="quote__who"><b>' + esc(q.name) + '</b><i>' + esc(q.where) + '</i></span>' +
-            '</figcaption>' +
-          '</div></div>' +
-        '</figure>'
-      ));
-    });
-  }
-
-  /* =====================================================================
-     5. CÁC BƯỚC
-     ===================================================================== */
-  function renderSteps() {
-    var host = $("#stepGrid");
-    if (!host || !C.steps) return;
-    host.innerHTML = "";
-    C.steps.forEach(function (s, i) {
-      host.appendChild(el(
-        '<li class="step rv">' +
-          '<span class="step__n" aria-hidden="true">' + (i + 1) + '</span>' +
-          '<h3>' + esc(s.title) + '</h3>' +
-          '<p>' + esc(s.text) + '</p>' +
-        '</li>'
-      ));
-    });
-  }
-
-  /* =====================================================================
-     6. HỎI ĐÁP
-     ===================================================================== */
-  function renderFaq() {
-    var host = $("#faqList");
-    if (!host || !C.faq) return;
-    host.innerHTML = "";
-    C.faq.forEach(function (f, i) {
-      var id = "faq-p-" + i;
-      var item = el(
-        '<div class="faq__item">' +
-          '<h3>' +
-            '<button class="faq__q" type="button" aria-expanded="false" aria-controls="' + id + '">' +
-              '<span>' + esc(f.q) + '</span>' +
-              '<span class="faq__ic" aria-hidden="true">' +
-                '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg>' +
-              '</span>' +
-            '</button>' +
-          '</h3>' +
-          '<div class="faq__a" id="' + id + '" hidden><p>' + esc(f.a) + '</p></div>' +
-        '</div>'
-      );
-      host.appendChild(item);
-    });
-
-    host.addEventListener("click", function (e) {
-      var btn = e.target.closest(".faq__q");
-      if (!btn) return;
-      var panel = document.getElementById(btn.getAttribute("aria-controls"));
-      var open = btn.getAttribute("aria-expanded") === "true";
-
-      /* Đóng các mục khác cho gọn */
-      $$(".faq__q", host).forEach(function (b) {
-        if (b === btn) return;
-        b.setAttribute("aria-expanded", "false");
-        var p = document.getElementById(b.getAttribute("aria-controls"));
-        if (p) { p.hidden = true; }
-        var it = b.closest(".faq__item");
-        if (it) it.classList.remove("is-open");
-      });
-
-      btn.setAttribute("aria-expanded", open ? "false" : "true");
-      if (panel) panel.hidden = open;
-      var item = btn.closest(".faq__item");
-      if (item) item.classList.toggle("is-open", !open);
-    });
-  }
-
-  /* =====================================================================
-     7. FORM ĐẶT XE
-     ===================================================================== */
-  var form, okBox, estBox, routeSel;
-
-  function fillRouteSelect() {
-    routeSel = $("#fRoute");
-    if (!routeSel || !C.routes) return;
-    C.routes.forEach(function (r) {
-      var o = document.createElement("option");
-      o.value = r.id;
-      o.textContent = r.from + " → " + r.to + " (" + r.km + " km)";
-      routeSel.appendChild(o);
-    });
+  /** Tham số trên URL, ví dụ dat-xe.html?tuyen=nt-dl&xe=7 */
+  function urlParam(name) {
+    try { return new URLSearchParams(window.location.search).get(name) || ""; } catch (e) { return ""; }
   }
 
   function findRoute(id) {
-    if (!C.routes) return null;
-    for (var i = 0; i < C.routes.length; i++) {
-      if (C.routes[i].id === id) return C.routes[i];
-    }
-    return null;
+    return C.routes.filter(function (r) { return r.id === id; })[0] || C.routes[0];
   }
 
-  /* Cập nhật dòng "giá dự kiến" mỗi khi đổi tuyến / loại xe */
-  function updateEstimate() {
-    if (!estBox) return;
-    var r = findRoute(routeSel && routeSel.value);
-    var car = $("#fCar") && $("#fCar").value;
-    if (!r || !car) {
-      estBox.textContent = "Chọn tuyến và loại xe để xem giá dự kiến.";
-      estBox.classList.remove("is-ready");
-      return;
-    }
-    var p = r.price[car];
-    estBox.innerHTML =
-      'Giá dự kiến: <b>' + esc(vnd(p)) + '</b> cho xe ' + esc(car) +
-      ' chỗ, trọn tuyến ' + esc(r.from) + ' → ' + esc(r.to) + '.';
-    estBox.classList.add("is-ready");
+  var TRIP_LABEL = { "1c": "một chiều", "kh": "khứ hồi trong ngày", "nn": "nhiều ngày, xe ở lại phục vụ" };
+
+  /* ---------------------------------------------------------------- render */
+  function renderCars() {
+    var host = $("#carGrid"); if (!host) { return; }
+    host.innerHTML = C.cars.map(function (c) {
+      var hasPrice = C.routes[0].price[c.id] !== undefined;
+      var cheapest = hasPrice ? C.routes.reduce(function (m, r) { return r.price[c.id] < m.price[c.id] ? r : m; }, C.routes[0]) : null;
+      var from = cheapest
+        ? 'Giá từ <b>' + vnd(cheapest.price[c.id]) + '</b> (Nha Trang đi ' + esc(cheapest.to) + ')'
+        : 'Giá theo tuyến, <a href="tel:' + esc(C.brand.hotlineTel[1]) + '"><b>gọi để báo giá</b></a>';
+      return '<article class="car bezel rv"><div class="core">' +
+        photoTag(c, esc(c.name), 480, 220) +
+        '<div class="car__body"><h3>' + esc(c.name) + '</h3>' +
+        '<div class="car__spec"><div><b>' + c.pax + ' khách</b>tối đa</div><div><b>' + esc(c.bags) + '</b>hành lý</div></div>' +
+        '<p>' + esc(c.note) + '</p>' +
+        '<p class="car__from">' + from + '</p>' +
+        '</div></div></article>';
+    }).join("");
   }
 
-  function setErr(name, msg) {
-    var p = $('[data-err="' + name + '"]');
-    var input = $('[name="' + name + '"]');
-    if (p) p.textContent = msg || "";
+  function renderGallery() {
+    var host = $("#galleryGrid"); if (!host || !C.gallery) { return; }
+    host.innerHTML = C.gallery.map(function (g) {
+      return '<figure class="shot bezel rv"><img src="' + esc(g.photo) + '" alt="' + esc(g.caption) + '" width="1200" height="675" loading="lazy">' +
+        '<figcaption>' + esc(g.caption) + '</figcaption></figure>';
+    }).join("");
+    /* Thiếu ảnh nào thì bỏ thẻ đó; hết ảnh thì ẩn cả mục. */
+    $$("img", host).forEach(function (img) {
+      img.addEventListener("error", function () {
+        img.closest("figure").remove();
+        if (!host.children.length) { host.closest("section").hidden = true; }
+      });
+    });
+  }
+
+  function renderDests() {
+    var host = $("#destGrid"); if (!host) { return; }
+    host.innerHTML = C.routes.map(function (r) {
+      return '<button type="button" class="dest bezel rv' + (r.featured ? " dest--featured" : "") + '" data-route="' + esc(r.id) + '" aria-label="Xem giá Nha Trang đi ' + esc(r.to) + '"><div class="core">' +
+        photoTag(r, "", 400, 280) +
+        '<div class="dest__body"><h3>' + esc(r.to) + '</h3>' +
+        '<div class="dest__price"><small>Xe 4 chỗ</small><b>' + vnd(r.price[4]) + '</b></div>' +
+        '<span class="dest__km">' + esc(r.km) + ', ' + esc(r.hours) + '</span>' +
+        '<p class="dest__note">' + esc(r.note) + '</p></div>' +
+        '</div></button>';
+    }).join("");
+    host.addEventListener("click", function (e) {
+      var btn = e.target.closest(".dest"); if (!btn) { return; }
+      var id = btn.getAttribute("data-route");
+      var sel = $("#qRoute"), box = $("#bao-gia");
+      if (!sel || !box) { window.location.href = "dat-xe.html?tuyen=" + encodeURIComponent(id); return; }
+      sel.value = id;
+      updateQuote();
+      box.scrollIntoView({ behavior: "smooth", block: "center" });
+      window.setTimeout(function () { sel.focus({ preventScroll: true }); }, 600);
+    });
+  }
+
+  function renderPrices() {
+    var body = $("#priceBody"); if (!body) { return; }
+    body.innerHTML = C.routes.map(function (r) {
+      return "<tr><td>" + esc(r.to) + "<small>" + esc(r.hours) + "</small></td><td>" + esc(r.km) + "</td>" +
+        '<td class="num">' + vnd(r.price[4]) + '</td><td class="num num--7">' + vnd(r.price[7]) + "</td></tr>";
+    }).join("");
+  }
+
+  function renderValues() {
+    var host = $("#valueList"); if (!host) { return; }
+    host.innerHTML = C.values.map(function (v) {
+      return "<li><b>" + esc(v.title) + "</b><p>" + esc(v.text) + "</p></li>";
+    }).join("");
+  }
+
+  /** Trang giới thiệu / liên hệ: danh sách lý do, dịch vụ (tiêu đề + mô tả). */
+  function renderPlainList(sel, items) {
+    var host = $(sel); if (!host || !items) { return; }
+    host.innerHTML = items.map(function (it) {
+      return "<li><h3>" + esc(it.title) + "</h3><p>" + esc(it.text) + "</p></li>";
+    }).join("");
+  }
+
+  function renderStories() {
+    var host = $("#storyGrid"); if (!host) { return; }
+    host.innerHTML = C.quotes.map(function (q) {
+      return '<article class="story bezel rv"><div class="core"><blockquote>' + esc(q.text) + "</blockquote>" +
+        '<div class="story__who"><span aria-hidden="true">' + esc(q.initial) + "</span><div><b>" + esc(q.name) + "</b><small>" + esc(q.where) + "</small></div></div></div></article>";
+    }).join("");
+  }
+
+  function renderFaq() {
+    var host = $("#faqList"); if (!host) { return; }
+    host.innerHTML = C.faq.map(function (f) {
+      return '<div class="rv"><dt>' + esc(f.q) + "</dt><dd>" + esc(f.a) + "</dd></div>";
+    }).join("");
+  }
+
+  function fillSelects() {
+    var opts = C.routes.map(function (r) {
+      return '<option value="' + esc(r.id) + '">' + esc(r.to) + "</option>";
+    }).join("");
+    ["#qRoute", "#bRoute"].forEach(function (s) { var el = $(s); if (el) { el.innerHTML = opts; } });
+  }
+
+  /* ---------------------------------------------------------------- báo giá tức thì */
+  function updateQuote() {
+    var sel = $("#qRoute"); if (!sel) { return; }
+    var r = findRoute(sel.value);
+    var car = ($('input[name="car"]:checked') || {}).value || "4";
+    $("#qPrice").textContent = vnd(r.price[car]);
+    $("#qMeta").textContent = r.km + ", khoảng " + r.hours.replace("≈ ", "");
+    var bRoute = $("#bRoute"); if (bRoute) { bRoute.value = r.id; }
+    var bCar = $("#bCar"); if (bCar) { bCar.value = car; }
+  }
+
+  function wireQuote() {
+    var form = $("#bao-gia"); if (!form) { return; }
+    form.addEventListener("submit", function (e) { e.preventDefault(); });
+    form.addEventListener("change", updateQuote);
+    updateQuote();
+  }
+
+  /* ---------------------------------------------------------------- form yêu cầu */
+  function setErr(form, name, msg) {
+    var p = $('[data-err="' + name + '"]', form);
+    var input = $('[name="' + name + '"]', form);
+    if (p) { p.textContent = msg || ""; }
     if (input) {
-      if (msg) {
-        input.setAttribute("aria-invalid", "true");
-        /* Chỉ gắn liên kết tới ô lỗi khi thực sự có lỗi, để trình đọc
-           màn hình đọc được nội dung lỗi ngay sau nhãn của ô nhập. */
-        if (p && p.id) input.setAttribute("aria-describedby", p.id);
-      } else {
-        input.removeAttribute("aria-invalid");
-        input.removeAttribute("aria-describedby");
-      }
+      if (msg) { input.setAttribute("aria-invalid", "true"); } else { input.removeAttribute("aria-invalid"); }
     }
-    return !msg;
   }
 
-  function validate(data) {
+  function validate(form, d) {
     var ok = true;
-
-    if (!data.name || data.name.trim().length < 2) {
-      ok = setErr("name", "Vui lòng nhập tên của bạn.") && ok;
-    } else { setErr("name", ""); }
-
-    var digits = (data.phone || "").replace(/[\s.\-()]/g, "");
-    if (!/^(\+?84|0)\d{9,10}$/.test(digits)) {
-      ok = setErr("phone", "Số điện thoại chưa đúng. Ví dụ: 0912 345 678.") && ok;
-    } else { setErr("phone", ""); }
-
-    if (!data.route || !findRoute(data.route)) {
-      ok = setErr("route", "Vui lòng chọn tuyến đi.") && ok;
-    } else { setErr("route", ""); }
-
-    if (!data.car) {
-      ok = setErr("car", "Vui lòng chọn loại xe.") && ok;
-    } else { setErr("car", ""); }
-
-    if (!data.date) {
-      ok = setErr("date", "Vui lòng chọn ngày đi.") && ok;
-    } else {
-      var today = new Date(); today.setHours(0, 0, 0, 0);
-      var picked = new Date(data.date + "T00:00:00");
-      if (isNaN(picked.getTime()) || picked < today) {
-        ok = setErr("date", "Ngày đi không thể nằm trong quá khứ.") && ok;
-      } else { setErr("date", ""); }
-    }
-
+    setErr(form, "name", d.name.length < 2 ? "Cho Thiên Phú biết tên để tiện xưng hô." : "");
+    ok = ok && d.name.length >= 2;
+    var phoneOk = /^(\+84|0)(\d[\s.]?){8,10}$/.test(d.phone);
+    setErr(form, "phone", phoneOk ? "" : "Số điện thoại chưa đúng, ví dụ 0912 345 678.");
+    ok = ok && phoneOk;
+    setErr(form, "date", d.date ? "" : "Chọn ngày đi để bên mình xếp xe.");
+    ok = ok && !!d.date;
     return ok;
   }
 
-  function summarize(data) {
-    var r = findRoute(data.route);
-    if (!r) return "";
-    var parts = [
-      r.from + " → " + r.to,
-      "xe " + data.car + " chỗ",
-      data.date + (data.time ? " lúc " + data.time : ""),
-      vnd(r.price[data.car])
-    ];
-    return parts.join(" · ");
+  function composeMessage(d) {
+    var r = findRoute(d.route);
+    var carName = "xe " + d.car + " chỗ";
+    var isListed = d.car !== "16" && d.trip === "1c";
+    var price = isListed ? vnd(r.price[d.car]) : "báo giá riêng";
+    var dateVi = d.date ? d.date.split("-").reverse().join("/") : "";
+    return "Chào Thiên Phú Travel, mình muốn đặt " + carName + " Nha Trang đi " + r.to +
+      " (" + TRIP_LABEL[d.trip] + ") ngày " + dateVi + (d.time ? " lúc " + d.time : "") +
+      (d.pax ? ", " + d.pax + " khách" : "") + (d.pickup ? ", đón tại " + d.pickup : "") +
+      ". Giá trên web: " + price + "." +
+      " Tên: " + d.name + ", SĐT: " + d.phone + "." + (d.note ? " Ghi chú: " + d.note : "");
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    var data = Object.fromEntries(new FormData(form).entries());
-    if (!validate(data)) {
-      var bad = $('[aria-invalid="true"]', form);
-      if (bad) bad.focus();
-      return;
-    }
-
-    var btn = $("#bookSubmit");
-    var label = $(".btn__label", btn);
-    var original = label.textContent;
-    btn.disabled = true;
-    label.textContent = "Đang gửi…";
-
-    /* -----------------------------------------------------------------
-       DEMO: không gửi đi đâu cả, chỉ hiện xác nhận sau 700ms.
-       Nối vào API thật tại đây. Ví dụ:
-
-       fetch("/api/dat-xe", {
-         method: "POST",
-         headers: { "Content-Type": "application/json" },
-         body: JSON.stringify(data)
-       })
-       .then(function (res) {
-         if (!res.ok) throw new Error("HTTP " + res.status);
-         return res.json();
-       })
-       .then(showOk)
-       .catch(function () {
-         label.textContent = original;
-         btn.disabled = false;
-         alert("Chưa gửi được, bạn thử lại hoặc gọi hotline 0900 000 000 nhé.");
-       });
-       ----------------------------------------------------------------- */
-    window.setTimeout(function () {
-      btn.disabled = false;
-      label.textContent = original;
-      showOk(data);
-    }, 700);
+  /** Điền sẵn tuyến và loại xe từ URL (thẻ điểm đến ở trang khác dẫn sang). */
+  function prefillFromUrl(form) {
+    var route = urlParam("tuyen"), car = urlParam("xe");
+    var bRoute = $("#bRoute", form), bCar = $("#bCar", form);
+    if (bRoute && route && findRoute(route).id === route) { bRoute.value = route; }
+    if (bCar && car && $('option[value="' + car + '"]', bCar)) { bCar.value = car; }
   }
 
-  function showOk(data) {
-    var summary = summarize(data);
-    $("#okText").innerHTML =
-      "Chuyến bạn vừa gửi: <b>" + esc(summary) + "</b>.<br>" +
-      "Chúng tôi sẽ gọi số <b>" + esc(data.phone) + "</b> để xác nhận.";
-    form.hidden = true;
-    okBox.hidden = false;
-    /* Chuyển tiêu điểm vào khối xác nhận: vừa cuộn tới, vừa để trình đọc
-       màn hình đọc nội dung thay vì mất tiêu điểm ở nút gửi đã bị ẩn. */
-    okBox.focus({ preventScroll: true });
-    okBox.scrollIntoView({ behavior: "smooth", block: "center" });
-  }
+  function wireBookForm() {
+    var form = $("#bookForm"); if (!form) { return; }
+    var ok = $("#bookOk");
+    var dateInput = $("#bDate");
+    if (dateInput) { dateInput.min = new Date().toISOString().slice(0, 10); }
+    prefillFromUrl(form);
 
-  function resetForm() {
-    form.reset();
-    $$(".field__err", form).forEach(function (p) { p.textContent = ""; });
-    $$('[aria-invalid]', form).forEach(function (i) { i.removeAttribute("aria-invalid"); });
-    $$('[aria-describedby]', form).forEach(function (i) { i.removeAttribute("aria-describedby"); });
-    okBox.removeAttribute("tabindex");
-    okBox.hidden = true;
-    form.hidden = false;
-    updateEstimate();
-    var f = $("#fName"); if (f) f.focus();
-  }
+    var via = "zalo";
+    $$('button[type="submit"]', form).forEach(function (b) {
+      b.addEventListener("click", function () { via = b.getAttribute("data-via") || "zalo"; });
+    });
 
-  /* Nút "Đặt tuyến này" trên card → cuộn tới form và điền sẵn */
-  function wireRouteButtons() {
-    document.addEventListener("click", function (e) {
-      var b = e.target.closest("[data-book]");
-      if (!b) return;
+    form.addEventListener("submit", function (e) {
       e.preventDefault();
-      var id = b.getAttribute("data-book");
-      if (routeSel) {
-        routeSel.value = id;
-        updateEstimate();
+      var fd = new FormData(form);
+      var d = {
+        name: String(fd.get("name") || "").trim(),
+        phone: String(fd.get("phone") || "").trim(),
+        route: String(fd.get("route") || ""),
+        car: String(fd.get("car") || "4"),
+        trip: TRIP_LABEL[fd.get("trip")] ? String(fd.get("trip")) : "1c",
+        date: String(fd.get("date") || ""),
+        time: String(fd.get("time") || ""),
+        pax: String(fd.get("pax") || "").trim(),
+        pickup: String(fd.get("pickup") || "").trim(),
+        note: String(fd.get("note") || "").trim()
+      };
+      if (!validate(form, d)) {
+        var bad = $('[aria-invalid="true"]', form); if (bad) { bad.focus(); }
+        return;
       }
-      var target = $("#dat-xe");
-      if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
-      window.setTimeout(function () {
-        var f = $("#fName");
-        if (f) f.focus({ preventScroll: true });
-      }, 500);
-    });
-  }
-
-  /* Ngày tối thiểu = hôm nay (không cho chọn ngày quá khứ trên lịch) */
-  function setDateFloor() {
-    var d = $("#fDate");
-    if (!d) return;
-    var t = new Date();
-    var iso = t.getFullYear() + "-" +
-      String(t.getMonth() + 1).padStart(2, "0") + "-" +
-      String(t.getDate()).padStart(2, "0");
-    d.min = iso;
-  }
-
-  function initForm() {
-    form = $("#bookForm");
-    if (!form) return;
-    okBox  = $("#bookOk");
-    estBox = $("#bookEst");
-
-    fillRouteSelect();
-    setDateFloor();
-
-    form.addEventListener("submit", handleSubmit);
-    form.addEventListener("change", function (e) {
-      if (e.target.name === "route" || e.target.name === "car") updateEstimate();
-    });
-    form.addEventListener("input", function (e) {
-      if (e.target.getAttribute("aria-invalid") === "true") {
-        setErr(e.target.name, "");
+      var msg = composeMessage(d);
+      if (via === "whatsapp") {
+        window.open("https://wa.me/" + C.brand.whatsapp + "?text=" + encodeURIComponent(msg), "_blank", "noopener");
+        showOk(ok, "Đã mở WhatsApp với tin nhắn soạn sẵn. Bấm gửi là xong.");
+        return;
       }
-    });
-
-    var again = $("#okAgain");
-    if (again) again.addEventListener("click", resetForm);
-
-    wireRouteButtons();
-    updateEstimate();
-  }
-
-  /* =====================================================================
-     8. NAV: cuộn, menu mobile, thank-you khi bấm gọi
-     ===================================================================== */
-  function initNav() {
-    var shell = $("#navShell");
-    var toggle = $("#navToggle");
-    var menu = $("#navMenu");
-
-    /* Nav nổi đổi nền khi đã cuộn */
-    var last = -1;
-    window.addEventListener("scroll", function () {
-      var y = window.scrollY;
-      var on = y > 24;
-      if (on !== last) { shell.classList.toggle("is-stuck", on); last = on; }
-    }, { passive: true });
-
-    if (!toggle || !menu) return;
-
-    function closeMenu() {
-      toggle.setAttribute("aria-expanded", "false");
-      shell.classList.remove("is-open");
-      document.body.classList.remove("nav-lock");
-    }
-
-    /* Đưa tiêu điểm tới link đầu tiên trong menu để bàn phím/trình đọc màn hình
-       không đi lạc ra sau lớp phủ. */
-    function focusFirstLink() {
-      var first = $("a", menu);
-      if (first) first.focus();
-    }
-
-    toggle.addEventListener("click", function () {
-      var open = toggle.getAttribute("aria-expanded") === "true";
-      toggle.setAttribute("aria-expanded", open ? "false" : "true");
-      shell.classList.toggle("is-open", !open);
-      document.body.classList.toggle("nav-lock", !open);
-      toggle.setAttribute("aria-label", open ? "Mở menu" : "Đóng menu");
-      if (open) {
-        /* Đóng bằng chính nút: trả tiêu điểm về nút. */
-        toggle.focus();
-      } else {
-        focusFirstLink();
-      }
-    });
-
-    /* Bấm vào link trong menu thì đóng menu */
-    menu.addEventListener("click", function (e) {
-      if (e.target.closest("a")) closeMenu();
-    });
-
-    /* Giữ tiêu điểm bên trong menu khi đang mở (bẫy Tab đơn giản). */
-    menu.addEventListener("keydown", function (e) {
-      if (e.key !== "Tab" || !shell.classList.contains("is-open")) return;
-      var items = $$("a", menu).filter(function (a) { return a.offsetParent !== null; });
-      if (!items.length) return;
-      var first = items[0];
-      var last = items[items.length - 1];
-      if (e.shiftKey && document.activeElement === first) {
-        e.preventDefault();
-        last.focus();
-      } else if (!e.shiftKey && document.activeElement === last) {
-        e.preventDefault();
-        first.focus();
-      }
-    });
-
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape" && shell.classList.contains("is-open")) {
-        closeMenu();
-        toggle.focus();
-      }
-    });
-
-    window.matchMedia("(min-width: 861px)").addEventListener("change", function (e) {
-      if (e.matches) closeMenu();
-    });
-  }
-
-  /* =====================================================================
-     9. ANIMATION KHI CUỘN TỚI
-     ===================================================================== */
-  function initReveal() {
-    var nodes = $$(".rv");
-    if (!nodes.length) return;
-
-    if (!("IntersectionObserver" in window) ||
-        window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      document.documentElement.classList.add("no-reveal");
-      return;
-    }
-
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en, i) {
-        if (!en.isIntersecting) return;
-        var n = en.target;
-        var d = Math.min(i, 4) * 70;
-        window.setTimeout(function () { n.classList.add("in"); }, d);
-        io.unobserve(n);
+      copyText(msg).then(function (copied) {
+        window.open("https://zalo.me/" + C.brand.zalo, "_blank", "noopener");
+        showOk(ok, copied
+          ? "Đã sao chép nội dung đặt xe. Dán vào khung chat Zalo vừa mở rồi gửi."
+          : "Đã mở Zalo. Nhắn giúp: " + msg);
       });
-    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
-
-    nodes.forEach(function (n) { io.observe(n); });
+    });
   }
 
-  function initYear() {
-    var y = $("#year");
-    if (y) y.textContent = String(new Date().getFullYear());
+  function copyText(t) {
+    if (navigator.clipboard && window.isSecureContext) {
+      return navigator.clipboard.writeText(t).then(function () { return true; }, function () { return false; });
+    }
+    return Promise.resolve(false);
   }
 
-  /* =====================================================================
-     Khởi động
-     ===================================================================== */
-  function boot() {
-    document.documentElement.classList.add("js");
-    renderHeroRoutes();
-    renderRouteGrid();
-    renderPriceTable();
-    renderQuotes();
-    renderSteps();
-    renderFaq();
-    initForm();
-    initNav();
-    initReveal();
-    initYear();
+  function showOk(el, text) {
+    if (!el) { return; }
+    el.textContent = text;
+    el.hidden = false;
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", boot);
-  } else {
-    boot();
+  /* ---------------------------------------------------------------- nav */
+  function wireNav() {
+    var toggle = $("#navToggle"), overlay = $("#navOverlay");
+    if (!toggle || !overlay) { return; }
+    function setOpen(open) {
+      if (open) {
+        overlay.hidden = false;
+        window.requestAnimationFrame(function () { overlay.classList.add("is-open"); });
+      } else {
+        overlay.classList.remove("is-open");
+        window.setTimeout(function () { overlay.hidden = true; }, 500);
+      }
+      document.body.classList.toggle("is-locked", open);
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      toggle.setAttribute("aria-label", open ? "Đóng menu" : "Mở menu");
+    }
+    toggle.addEventListener("click", function () { setOpen(toggle.getAttribute("aria-expanded") !== "true"); });
+    overlay.addEventListener("click", function (e) { if (e.target.closest("a")) { setOpen(false); } });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !overlay.hidden) { setOpen(false); } });
   }
+
+  /* Hiện dần khi cuộn tới. Không có IntersectionObserver thì hiện luôn. */
+  function wireReveal() {
+    /* Gán chỉ số cho con trong lưới để hiện lần lượt. */
+    $$(".cars, .shots, .dests, .stories, .faq, .values, .why, .services, .contacts, #priceBody").forEach(function (grid) {
+      Array.prototype.forEach.call(grid.children, function (el, i) {
+        el.classList.add("rv"); el.style.setProperty("--i", i);
+      });
+    });
+    var items = $$(".rv");
+    if (!("IntersectionObserver" in window)) { items.forEach(function (el) { el.classList.add("in"); }); return; }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: .08 });
+    items.forEach(function (el) { io.observe(el); });
+    /* Lưới an toàn: sau 6 giây hiện hết, phòng trường hợp observer không bắn. */
+    window.setTimeout(function () { items.forEach(function (el) { el.classList.add("in"); }); }, 6000);
+  }
+
+  /* ---------------------------------------------------------------- init */
+  renderCars();
+  renderGallery();
+  renderDests();
+  renderPrices();
+  renderValues();
+  renderStories();
+  renderFaq();
+  renderPlainList("#whyList", C.why);
+  renderPlainList("#serviceList", C.services);
+  fillSelects();
+  wireQuote();
+  wireBookForm();
+  wireNav();
+  wireReveal();
 })();

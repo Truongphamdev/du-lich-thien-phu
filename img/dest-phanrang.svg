@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 280" role="img" aria-label="Phan Rang">
+  <defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd9a3"/><stop offset="1" stop-color="#fff3e0"/></linearGradient></defs>
+  <rect width="400" height="280" fill="url(#sky)"/>
+  <circle cx="320" cy="72" r="34" fill="#f29a3a"/>
+  <path d="M0 170c50-30 110-50 200-40s140 20 200 0v110H0z" fill="#c9a06a"/>
+  <path d="M0 200c80-20 160-20 240-10s100 0 160-10v100H0z" fill="#a97d48"/>
+  <g fill="#8b4a2a"><path d="M150 180l20-90 20 90zM190 180l16-70 16 70zM120 180l14-50 14 50z"/></g>
+  <g fill="#b85e36"><rect x="156" y="150" width="28" height="30"/><rect x="194" y="158" width="20" height="22"/><rect x="124" y="166" width="20" height="14"/></g>
+  <g stroke="#2e6b52" stroke-width="6" stroke-linecap="round"><path d="M20 250c40-10 80-10 120 0M160 262c40-10 80-10 120 0M300 250c30-8 60-8 90 0"/></g>
+  <g fill="#6b2d5c"><circle cx="60" cy="246" r="4"/><circle cx="100" cy="244" r="4"/><circle cx="200" cy="258" r="4"/><circle cx="240" cy="257" r="4"/><circle cx="340" cy="246" r="4"/></g>
+</svg>
