@@ -20,11 +20,11 @@ window.TP_CONTENT = {
 
   /* ẢNH: mỗi mục có `photo` (ảnh JPG do AI tạo, xem img/PROMPTS.md) và `img`
      (SVG tạm). Trang ưu tiên JPG; chưa có file JPG thì tự dùng SVG.           */
-  /* Loại xe đang nhận. pax: số khách tối đa (trừ tài xế). */
+  /* Loại xe đang nhận. pax: số khách tối đa theo thông tin chủ xe. */
   cars: [
-    { id: "4", name: "Xe 4 chỗ", pax: 3, bags: "2 vali lớn", photo: "img/car-4.jpg", img: "img/car-4.svg",
+    { id: "4", name: "Xe 4 chỗ", pax: 4, bags: "2 vali lớn", photo: "img/car-4.jpg", img: "img/car-4.svg",
       note: "Sedan máy lạnh, êm và tiết kiệm cho cặp đôi hoặc nhóm nhỏ." },
-    { id: "7", name: "Xe 7 chỗ", pax: 6, bags: "4 vali lớn", photo: "img/car-7.jpg", img: "img/car-7.svg",
+    { id: "7", name: "Xe 7 chỗ", pax: 7, bags: "4 vali lớn", photo: "img/car-7.jpg", img: "img/car-7.svg",
       note: "Gầm cao, rộng rãi cho gia đình, nhóm bạn và đoàn mang nhiều hành lý." },
     { id: "16", name: "Xe 16 chỗ", pax: 14, bags: "nhiều hành lý", photo: "img/car-16.jpg", img: "",
       note: "Cho đoàn đông, công ty đi nghỉ hoặc đón tiễn sân bay số lượng lớn. Báo giá theo tuyến." }

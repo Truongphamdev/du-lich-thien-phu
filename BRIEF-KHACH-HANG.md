@@ -115,7 +115,7 @@ _Nếu chọn A hoặc B, anh/chị có thể bỏ trống toàn bộ phần gi�
 
 | Loại xe | Chỗ ngồi | Chở được tối đa | Có nhận? |
 |---|---|---|---|
-| Xe 4 chỗ | 4 | 3 khách | [ ] |
+| Xe 4 chỗ | 4 | 4 khách | [ ] |
 | Xe 7 chỗ | 7 | 5 khách | [ ] |
 | Xe 16 chỗ | 16 | 12 khách | [ ] |
 | Xe 29 chỗ | 29 | | [ ] |
