@@ -41,7 +41,7 @@ window.TP_CONTENT = {
 
   /* Tuyến đường & giá trọn xe (VND). km: quãng đường, img: ảnh minh họa điểm đến. */
   routes: [
-    { id: "nt-dl",  to: "Đà Lạt",            km: "140-150 km", hours: "≈ 3,5 giờ", price: { 4: 900000,  7: 1100000 }, photo: "img/dest-dalat.jpg", img: "img/dest-dalat.svg",     featured: true,
+    { id: "nt-dl",  to: "Đà Lạt",            km: "140-150 km", hours: "≈ 3,5 giờ", price: { 4: 900000,  7: 1000000 }, photo: "img/dest-dalat.jpg", img: "img/dest-dalat.svg",     featured: true,
       note: "Đường đèo Khánh Lê, tài xế quen tay. Lên tới nơi còn kịp cà phê chiều." },
     { id: "nt-cxr", to: "Sân bay Cam Ranh",  km: "35 km",        hours: "≈ 45 phút", price: { 4: 300000,  7: 350000 },  photo: "img/dest-camranh.jpg", img: "img/dest-camranh.svg",   featured: true,
       note: "Đón trả tận cổng, canh giờ bay. Máy bay trễ vẫn chờ." },
@@ -51,7 +51,7 @@ window.TP_CONTENT = {
       note: "Qua đèo Cả, dừng chụp hình Đại Lãnh nếu bạn muốn." },
     { id: "nt-pt",  to: "Phan Thiết",        km: "170-180 km", hours: "≈ 3,5 giờ", price: { 4: 1300000, 7: 1500000 }, photo: "img/dest-phanthiet.jpg", img: "img/dest-phanthiet.svg",
       note: "Thẳng tới Mũi Né, đồi cát và làng chài." },
-    { id: "nt-qn",  to: "Quy Nhơn",          km: "240-280 km", hours: "≈ 5 giờ",   price: { 4: 2000000, 7: 2200000 }, photo: "img/dest-quynhon.jpg", img: "img/dest-quynhon.svg",
+    { id: "nt-qn",  to: "Quy Nhơn",          km: "240-280 km", hours: "≈ 5 giờ",   price: { 4: 1800000, 7: 2000000 }, photo: "img/dest-quynhon.jpg", img: "img/dest-quynhon.svg",
       note: "Đường ven biển đẹp, ghé Kỳ Co hoặc Eo Gió trên đường." },
     { id: "nt-vt",  to: "Vũng Tàu",          km: "320-360 km", hours: "≈ 7 giờ",   price: { 4: 2500000, 7: 2700000 }, photo: "img/dest-vungtau.jpg", img: "img/dest-vungtau.svg",
       note: "Chạy cao tốc, đi sáng tới nơi kịp ăn trưa hải sản." },

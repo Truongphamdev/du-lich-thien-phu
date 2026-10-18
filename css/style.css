@@ -6,8 +6,8 @@
    ========================================================================== */
 
 :root{
-  --bg:#F4F7F8;
-  --bg-2:#EBF1F2;
+  --bg:#DCEFF4;
+  --bg-2:#C9E6ED;
   --white:#FFFFFF;
   --ink:#0E2433;
   --ink-2:#3C4F5C;
@@ -33,7 +33,7 @@
   --shadow-soft:0 1px 2px rgba(10,61,85,.04),0 24px 48px -28px rgba(10,61,85,.28);
   --shadow-float:0 2px 6px rgba(10,61,85,.05),0 40px 80px -40px rgba(10,61,85,.4);
   --z-nav:120;--z-overlay:110;--z-dock:90;--z-grain:5;
-  --surface:#FFFFFF;--surface-2:#F4F7F8;--nav-bg:rgba(255,255,255,.72);--overlay-bg:rgba(244,247,248,.86);
+  --surface:#FFFFFF;--surface-2:#EAF5F8;--nav-bg:rgba(255,255,255,.72);--overlay-bg:rgba(220,239,244,.86);
   --bezel-top:rgba(255,255,255,.7);--bezel-bot:rgba(10,61,85,.04);--core-hi:rgba(255,255,255,.9);
 }
 @media (prefers-color-scheme:dark){

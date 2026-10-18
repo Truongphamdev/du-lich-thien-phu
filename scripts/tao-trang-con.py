@@ -21,7 +21,7 @@ def head(file, title, desc, og_img="img/hero.jpg"):
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{title}</title>
 <meta name="description" content="{desc}">
-<meta name="theme-color" content="#F4F7F8">
+<meta name="theme-color" content="#DCEFF4">
 <meta property="og:type" content="website">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
@@ -193,7 +193,7 @@ pages["gioi-thieu.html"] = head("gioi-thieu.html",
 
 pages["bang-gia.html"] = head("bang-gia.html",
     "Bảng giá xe dịch vụ Nha Trang đi Đà Lạt, Cam Ranh, Phan Rang, Sài Gòn — Thiên Phú Travel",
-    "Giá trọn xe 4 chỗ và 7 chỗ từ Nha Trang: Đà Lạt 900.000, sân bay Cam Ranh 300.000, Phan Rang 850.000, Phan Thiết 1.300.000, Quy Nhơn 2.000.000, Sài Gòn 2.500.000. Đã gồm xăng, cầu đường, tài xế.") + f'''
+    "Giá trọn xe 4 chỗ và 7 chỗ từ Nha Trang: Đà Lạt 900.000, sân bay Cam Ranh 300.000, Phan Rang 850.000, Phan Thiết 1.300.000, Quy Nhơn 1.800.000, Sài Gòn 2.500.000. Đã gồm xăng, cầu đường, tài xế.") + f'''
 <section class="phero phero--solo" aria-labelledby="pageTitle">
   <div class="wrap phero__grid">
     <div class="phero__copy">
