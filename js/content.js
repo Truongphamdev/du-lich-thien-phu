@@ -14,6 +14,8 @@ window.TP_CONTENT = {
     zalo: "0964559794",
     whatsapp: "84964559794",
     email: "phanson25042102@gmail.com",
+    /* URL Web App Google Apps Script nhận form (xem scripts/google-apps-script/HUONG-DAN.md). Để trống = chưa bật. */
+    formUrl: "",
     facebook: "https://www.facebook.com/share/19cJy7iHVu/?mibextid=wwXIfr",
     area: ["Nha Trang", "Đà Lạt", "Cam Ranh", "Phan Rang", "Phan Thiết", "Tuy Hòa", "Quy Nhơn", "Vũng Tàu", "Sài Gòn"]
   },

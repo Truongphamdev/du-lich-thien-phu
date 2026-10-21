@@ -235,6 +235,17 @@
         return;
       }
       var msg = composeMessage(d);
+      var mailed = sendToInbox(d, msg, via);
+      if (via === "email") {
+        setBusy(form, true);
+        mailed.then(function (sent) {
+          setBusy(form, false);
+          showOk(ok, sent
+            ? "Đã gửi yêu cầu. Thiên Phú sẽ gọi hoặc nhắn lại cho bạn trong ít phút."
+            : "Chưa gửi được. Bạn thử lại hoặc gọi " + C.brand.hotline[1] + " giúp mình.");
+        });
+        return;
+      }
       if (via === "whatsapp") {
         window.open("https://wa.me/" + C.brand.whatsapp + "?text=" + encodeURIComponent(msg), "_blank", "noopener");
         showOk(ok, "Đã mở WhatsApp với tin nhắn soạn sẵn. Bấm gửi là xong.");
@@ -247,6 +258,23 @@
           : "Đã mở Zalo. Nhắn giúp: " + msg);
       });
     });
+  }
+
+  /** Gửi bản sao yêu cầu về hộp thư/Sheet của Thiên Phú (nếu đã cấu hình formUrl). */
+  function sendToInbox(d, msg, via) {
+    if (!window.TP_MAIL) { return Promise.resolve(false); }
+    var r = findRoute(d.route);
+    var isListed = d.car !== "16" && d.trip === "1c";
+    return window.TP_MAIL.send({
+      name: d.name, phone: d.phone, route: "Nha Trang đi " + r.to, car: "Xe " + d.car + " chỗ",
+      trip: TRIP_LABEL[d.trip], date: d.date, timePick: d.time, pax: d.pax, pickup: d.pickup,
+      price: isListed ? vnd(r.price[d.car]) : "báo giá riêng", note: d.note, via: via, message: msg
+    });
+  }
+
+  /** Khóa/mở các nút gửi trong lúc chờ phản hồi. */
+  function setBusy(form, busy) {
+    $$('button[type="submit"]', form).forEach(function (b) { b.disabled = busy; });
   }
 
   function copyText(t) {

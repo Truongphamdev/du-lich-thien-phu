@@ -54,6 +54,7 @@ FOOT = '''
 
 <script src="js/content.js"></script>
 <script src="js/layout.js"></script>
+<script src="js/mail.js"></script>
 <script src="js/app.js"></script>
 <script src="js/effects.js"></script>
 </body>
@@ -115,6 +116,7 @@ BOOK_FORM = '''
           <div class="book__send">
             <button class="btn btn--sun btn--lg" type="submit" data-via="zalo"><span>Gửi qua Zalo</span>''' + ARROW + '''</button>
             <button class="btn btn--line btn--lg" type="submit" data-via="whatsapp"><span>Gửi qua WhatsApp</span>''' + ARROW + '''</button>
+            <button class="btn btn--line btn--lg" type="submit" data-via="email"><span>Gửi về email</span>''' + ARROW + '''</button>
           </div>
           <p class="book__ok" id="bookOk" role="status" hidden></p>
           <p class="book__privacy">Số điện thoại chỉ dùng để liên hệ về chuyến này.</p>
