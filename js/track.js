@@ -27,6 +27,7 @@
   function initFacebook(id) {
     /* Đoạn khởi tạo chuẩn của Meta Pixel, rút gọn. */
     var f = window.fbq = function () { f.callMethod ? f.callMethod.apply(f, arguments) : f.queue.push(arguments); };
+    if (!window._fbq) { window._fbq = f; }
     f.push = f; f.loaded = true; f.version = "2.0"; f.queue = [];
     loadScript("https://connect.facebook.net/en_US/fbevents.js");
     f("init", id); f("track", "PageView");
