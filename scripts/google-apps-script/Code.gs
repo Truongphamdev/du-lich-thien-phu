@@ -11,7 +11,9 @@ var COLUMNS = [
   ["time", "Thời gian"], ["name", "Tên"], ["phone", "SĐT"], ["route", "Tuyến"],
   ["car", "Xe"], ["trip", "Loại hình"], ["date", "Ngày đi"], ["timePick", "Giờ đón"],
   ["pax", "Số khách"], ["pickup", "Điểm đón"], ["price", "Giá web"], ["note", "Ghi chú"],
-  ["via", "Gửi qua"], ["source", "Trang"]
+  ["via", "Gửi qua"], ["source", "Trang"],
+  ["utm_source", "UTM source"], ["utm_medium", "UTM medium"], ["utm_campaign", "UTM campaign"],
+  ["utm_content", "UTM content"], ["fbclid", "fbclid"], ["gclid", "gclid"]
 ];
 
 /** Kiểm tra nhanh: mở URL /exec trên trình duyệt phải thấy dòng này. */

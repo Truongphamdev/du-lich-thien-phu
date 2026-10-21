@@ -19,7 +19,8 @@
   function send(payload) {
     var url = formUrl();
     if (!url) { return Promise.resolve(false); }
-    var body = JSON.stringify(Object.assign({}, payload, {
+    var utm = window.TP_TRACK ? window.TP_TRACK.utm() : {};
+    var body = JSON.stringify(Object.assign({}, payload, utm, {
       time: new Date().toLocaleString("vi-VN"),
       source: location.href
     }));

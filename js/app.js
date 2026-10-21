@@ -236,6 +236,7 @@
       }
       var msg = composeMessage(d);
       var mailed = sendToInbox(d, msg, via);
+      trackLead(d);
       if (via === "email") {
         setBusy(form, true);
         mailed.then(function (sent) {
@@ -270,6 +271,14 @@
       trip: TRIP_LABEL[d.trip], date: d.date, timePick: d.time, pax: d.pax, pickup: d.pickup,
       price: isListed ? vnd(r.price[d.car]) : "báo giá riêng", note: d.note, via: via, message: msg
     });
+  }
+
+  /** Báo sự kiện Lead cho Pixel/Google khi yêu cầu hợp lệ đã được gửi đi. */
+  function trackLead(d) {
+    if (!window.TP_TRACK) { return; }
+    var r = findRoute(d.route);
+    var isListed = d.car !== "16" && d.trip === "1c";
+    window.TP_TRACK.lead({ route: "Nha Trang đi " + r.to, car: "Xe " + d.car + " chỗ", value: isListed ? r.price[d.car] : 0 });
   }
 
   /** Khóa/mở các nút gửi trong lúc chờ phản hồi. */

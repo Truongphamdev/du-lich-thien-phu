@@ -53,6 +53,7 @@ FOOT = '''
 <div id="siteDock"></div>
 
 <script src="js/content.js"></script>
+<script src="js/track.js"></script>
 <script src="js/layout.js"></script>
 <script src="js/mail.js"></script>
 <script src="js/app.js"></script>
