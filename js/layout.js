@@ -70,7 +70,7 @@
     }).join("");
     return '<footer class="foot" id="chan-trang"><div class="wrap foot__grid">' +
       '<div class="foot__brand"><p class="logo__text">Thiên Phú <span>Travel</span></p>' +
-      "<p>Xe dịch vụ du lịch Nha Trang, Đà Lạt và dọc miền Trung từ " + b.since + ".</p>" +
+      "<p>Xe dịch vụ du lịch Nha Trang, Đà Lạt và miền Đông, miền Nam từ " + b.since + ".</p>" +
       '<a class="foot__fb" href="' + esc(b.facebook) + '" target="_blank" rel="noopener">Fanpage Facebook</a></div>' +
       '<dl class="foot__contact">' +
       '<div><dt>Hotline 24/7</dt><dd><a href="tel:' + esc(b.hotlineTel[1]) + '">' + esc(b.hotline[1]) + '</a><a href="tel:' + esc(b.hotlineTel[0]) + '">' + esc(b.hotline[0]) + "</a></dd></div>" +

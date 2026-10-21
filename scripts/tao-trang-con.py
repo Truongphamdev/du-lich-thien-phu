@@ -150,7 +150,7 @@ pages["gioi-thieu.html"] = head("gioi-thieu.html",
     "Thiên Phú Travel chạy xe dịch vụ từ năm 2011: Nha Trang đi Đà Lạt, sân bay Cam Ranh và các tỉnh duyên hải Nam Trung Bộ. Xe 4, 7, 16 chỗ, tài xế quen đường, giá minh bạch.",
     "img/gal-fleet.jpg") + phero(
     "Giới thiệu",
-    "Mười lăm năm chạy xe giữa Nha Trang, Đà Lạt và dọc biển miền Trung.",
+    "Mười lăm năm chạy xe giữa Nha Trang, Đà Lạt và miền Đông, miền Nam.",
     "Thiên Phú Travel chạy xe dịch vụ từ năm 2011, xuất phát Nha Trang. Khách gọi là có xe, giá chốt trước, tài xế đón tận cửa và chờ đến khi bạn xong việc.",
     btn_call() + btn_line("Xem bảng giá", "bang-gia.html"),
     ("img/gal-fleet.jpg", "Đội xe 4, 7 và 16 chỗ của Thiên Phú Travel đậu trước biển Nha Trang")) + '''
