@@ -28,6 +28,7 @@ def head(file, title, desc, og_img="img/hero.jpg"):
 <meta property="og:image" content="{og_img}">
 <meta property="og:locale" content="vi_VN">
 <link rel="canonical" href="https://phucphucar.com/{file.replace(".html", "")}">
+<meta name="facebook-domain-verification" content="80flu518w3gnijym9yvctttt11ngsz">
 <meta property="og:url" content="https://phucphucar.com/{file.replace(".html", "")}">
 <link rel="icon" href="{FAVICON}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
