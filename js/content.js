@@ -15,7 +15,7 @@ window.TP_CONTENT = {
     whatsapp: "84964559794",
     email: "phanson25042102@gmail.com",
     /* URL Web App Google Apps Script nhận form (xem scripts/google-apps-script/HUONG-DAN.md). Để trống = chưa bật. */
-    formUrl: "",
+    formUrl: "https://script.google.com/macros/s/AKfycby9SL4NyljqehP0W_WzGXMEKzjpS82L5TrOO11p8NcP1fqCOGKHyH2XS6gC_df6aBlw/exec",
     facebook: "https://www.facebook.com/share/19cJy7iHVu/?mibextid=wwXIfr",
     area: ["Nha Trang", "Đà Lạt", "Cam Ranh", "Phan Rang", "Phan Thiết", "Tuy Hòa", "Quy Nhơn", "Vũng Tàu", "Sài Gòn"]
   },
