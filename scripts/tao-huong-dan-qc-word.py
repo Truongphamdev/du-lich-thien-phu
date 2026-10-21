@@ -46,7 +46,10 @@ def build():
                     cell = t.cell(r, c); cell.text = ""; add_runs(cell.paragraphs[0], val)
                     if r == 0: shade(cell, "E8F1F5"); cell.paragraphs[0].runs[0].bold = True
             doc.add_paragraph(); continue
-        elif re.match(r"^\d+\. ", ln): add_runs(doc.add_paragraph(style="List Number"), re.sub(r"^\d+\. ", "", ln))
+        elif re.match(r"^\d+\. ", ln):
+            num = re.match(r"^(\d+)\. ", ln).group(1)
+            par = doc.add_paragraph(); par.paragraph_format.left_indent = Cm(0.9); par.paragraph_format.first_line_indent = Cm(-0.6)
+            r = par.add_run(num + ".  "); r.bold = True; add_runs(par, re.sub(r"^\d+\. ", "", ln))
         elif ln.startswith("- "): add_runs(doc.add_paragraph(style="List Bullet"), ln[2:])
         elif ln.strip() == "---": doc.add_page_break()
         elif ln.strip(): add_runs(doc.add_paragraph(), ln)
