@@ -30,10 +30,11 @@
     });
   }
 
-  /** Tên file của trang hiện tại, ví dụ "bang-gia.html". Mở từ thư mục gốc thì là trang chủ. */
+  /** Tên file của trang hiện tại, ví dụ "bang-gia.html". Trên Vercel (cleanUrls) địa chỉ là
+      "/bang-gia" không có đuôi, nên lấy tên rồi tự gắn ".html"; trống hoặc "index" là trang chủ. */
   function currentPage() {
-    var file = window.location.pathname.split("/").pop();
-    return file && file.indexOf(".html") > -1 ? file : "index.html";
+    var slug = window.location.pathname.split("/").pop().replace(/\.html$/, "");
+    return slug && slug !== "index" ? slug + ".html" : "index.html";
   }
 
   function pageLinks(cls) {
