@@ -106,6 +106,31 @@
     }, { rootMargin: "-40px 0px 0px 0px" }).observe(sentinel);
   }
 
+  /* ---- 6a. Thanh vàng dưới nav trượt theo mục đang rê chuột, rời ra thì về trang hiện tại ---- */
+  function wireNavBar() {
+    var ul = $(".nav__links"); if (!ul) { return; }
+    var bar = document.createElement("span"); bar.className = "nav__bar"; bar.setAttribute("aria-hidden", "true");
+    ul.appendChild(bar); ul.classList.add("has-bar");
+    var PAD = 14; /* trùng padding ngang của link */
+    function home() { return $("a.is-active", ul); }
+    function moveTo(a) {
+      if (!a) { bar.style.opacity = "0"; return; }
+      var r = a.getBoundingClientRect(), u = ul.getBoundingClientRect();
+      bar.style.width = Math.max(0, r.width - PAD * 2) + "px";
+      bar.style.transform = "translateX(" + (r.left - u.left + PAD) + "px)";
+      bar.style.opacity = "1";
+    }
+    ul.addEventListener("mouseover", function (e) { var a = e.target.closest("a"); if (a) { moveTo(a); } });
+    ul.addEventListener("focusin", function (e) { var a = e.target.closest("a"); if (a) { moveTo(a); } });
+    ul.addEventListener("mouseleave", function () { moveTo(home()); });
+    ul.addEventListener("focusout", function () { moveTo(home()); });
+    window.addEventListener("resize", function () { moveTo(home()); });
+    moveTo(home());
+    /* bật chuyển động sau khi đặt vị trí đầu, để lúc tải không thấy thanh chạy từ mép */
+    window.requestAnimationFrame(function () { bar.classList.add("is-live"); });
+    if (document.fonts && document.fonts.ready) { document.fonts.ready.then(function () { moveTo(home()); }); }
+  }
+
   /* ---- 6b. Scrollspy: gạch dưới trượt theo mục đang xem ---- */
   function wireScrollSpy() {
     var links = $$('.nav__links a[href^="#"]'); if (!links.length || !("IntersectionObserver" in window)) { return; }
@@ -256,6 +281,7 @@
   /* ---- init ---- */
   buildMarquee();
   wireScrollUi();
+  wireNavBar();
   wireScrollSpy();
   wirePriceTick();
   if (reduce) {

@@ -149,6 +149,11 @@ p{text-wrap:pretty}
 .nav__links a{position:relative}
 .nav__links a::after{content:"";position:absolute;left:14px;right:14px;bottom:5px;height:2px;border-radius:2px;background:var(--sun);transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease)}
 .nav__links a.is-active::after{transform:scaleX(1)}
+/* Thanh vàng trượt theo mục đang rê chuột (effects.js tạo .nav__bar); có JS thì tắt ::after */
+.nav__links{position:relative}
+.nav__links.has-bar a::after{display:none}
+.nav__bar{position:absolute;left:0;bottom:5px;height:2px;width:0;border-radius:2px;background:var(--sun);opacity:0;pointer-events:none;transform:translateX(0)}
+.nav__bar.is-live{transition:transform .5s var(--ease),width .5s var(--ease),opacity .3s}
 .nav__call{margin-left:6px}
 .nav__toggle{display:none;width:44px;height:44px;border-radius:50%;position:relative;background:rgba(10,61,85,.06)}
 .nav__toggle span{position:absolute;left:13px;right:13px;height:2px;background:var(--ink);border-radius:2px;transition:transform .5s var(--ease),top .5s var(--ease)}
