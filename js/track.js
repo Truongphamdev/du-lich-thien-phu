@@ -1,7 +1,7 @@
 /* ==========================================================================
    track.js — Đo lường cho quảng cáo. Nạp Facebook Pixel và Google tag khi
    content.js → brand.tracking có ID; đọc UTM từ URL và nhớ trong phiên để
-   gắn vào yêu cầu đặt xe; bắn sự kiện Lead khi khách gửi form.
+   gắn vào yêu cầu đặt xe; bắn Lead khi khách gửi form, Contact khi bấm Gọi/Zalo/WhatsApp.
    ========================================================================== */
 (function () {
   "use strict";
@@ -54,7 +54,32 @@
     }
   }
 
+  /** Kênh liên hệ của một link: "call" (tel:), "zalo", "whatsapp"; không phải thì null. */
+  function contactChannel(href) {
+    if (!href) { return null; }
+    if (href.indexOf("tel:") === 0) { return "call"; }
+    if (href.indexOf("zalo.me") > -1) { return "zalo"; }
+    if (href.indexOf("wa.me") > -1 || href.indexOf("whatsapp") > -1) { return "whatsapp"; }
+    return null;
+  }
+
+  /** Bắn sự kiện Contact khi khách bấm Gọi / Zalo / WhatsApp, để Events Manager
+      đếm được bao nhiêu người vào web rồi liên hệ, không chỉ bao nhiêu người gửi form. */
+  function contact(channel) {
+    var page = location.pathname.replace(/^\/|\.html$/g, "") || "trang-chu";
+    if (window.fbq && T.fbPixel) { window.fbq("track", "Contact", { content_name: channel, content_category: page }); }
+    if (window.gtag && T.gaId) { window.gtag("event", "contact", { channel: channel, page: page }); }
+  }
+
+  function wireContactClicks() {
+    document.addEventListener("click", function (e) {
+      var a = e.target.closest && e.target.closest("a[href]"); if (!a) { return; }
+      var ch = contactChannel(a.getAttribute("href")); if (ch) { contact(ch); }
+    }, true);
+  }
+
   if (T.fbPixel) { initFacebook(T.fbPixel); }
   if (T.gaId) { initGoogle(T.gaId); }
-  window.TP_TRACK = { utm: readUtm, lead: lead };
+  wireContactClicks();
+  window.TP_TRACK = { utm: readUtm, lead: lead, contact: contact };
 })();
