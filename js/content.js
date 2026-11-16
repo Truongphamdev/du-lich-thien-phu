@@ -46,21 +46,25 @@ window.TP_CONTENT = {
 
   /* Tuyến đường & giá trọn xe (VND). km: quãng đường, img: ảnh minh họa điểm đến. */
   routes: [
-    { id: "nt-dl",  to: "Đà Lạt",            km: "140-150 km", hours: "≈ 3,5 giờ", price: { 4: 900000,  7: 1000000 }, photo: "img/dest-dalat.jpg", img: "img/dest-dalat.svg",     featured: true,
+    { id: "nt-dl",  to: "Đà Lạt",            km: "140-150 km", hours: "≈ 3,5 giờ", price: { 4: 1000000, 7: 1100000 }, photo: "img/dest-dalat.jpg", img: "img/dest-dalat.svg",     featured: true,
       note: "Đường đèo Khánh Lê, tài xế quen tay. Lên tới nơi còn kịp cà phê chiều." },
     { id: "nt-cxr", to: "Sân bay Cam Ranh",  km: "35 km",        hours: "≈ 45 phút", price: { 4: 300000,  7: 350000 },  photo: "img/dest-camranh.jpg", img: "img/dest-camranh.svg",   featured: true,
       note: "Đón trả tận cổng, canh giờ bay. Máy bay trễ vẫn chờ." },
-    { id: "nt-pr",  to: "Phan Rang",         km: "110-130 km", hours: "≈ 2,5 giờ", price: { 4: 850000,  7: 950000 },  photo: "img/dest-phanrang.jpg", img: "img/dest-phanrang.svg",
+    { id: "nt-cr",  to: "Cam Ranh",          km: "55-60 km",   hours: "≈ 1 giờ 15", price: { 4: 450000,  7: 500000 },  photo: "img/dest-camranh-tp.jpg", img: "img/dest-camranh.svg",
+      note: "Bãi Dài, Bình Ba, cảng Cam Ranh và các resort dọc đường ven biển." },
+    { id: "nt-nh",  to: "Ninh Hòa",          km: "30-35 km",   hours: "≈ 45 phút", price: { 4: 450000,  7: 500000 },  photo: "img/dest-ninhhoa.jpg", img: "img/dest-tuyhoa.svg",
+      note: "Dốc Lết, Ninh Vân, suối nước nóng Trường Xuân, nem Ninh Hòa." },
+    { id: "nt-pr",  to: "Phan Rang",         km: "110-130 km", hours: "≈ 2,5 giờ", price: { 4: 900000,  7: 1000000 }, photo: "img/dest-phanrang.jpg", img: "img/dest-phanrang.svg",
       note: "Men theo biển, có thể ghé Vĩnh Hy hoặc vườn nho dọc đường." },
-    { id: "nt-th",  to: "Tuy Hòa",           km: "100-120 km", hours: "≈ 2,5 giờ", price: { 4: 850000,  7: 950000 },  photo: "img/dest-tuyhoa.jpg", img: "img/dest-tuyhoa.svg",
+    { id: "nt-th",  to: "Tuy Hòa",           km: "100-120 km", hours: "≈ 2,5 giờ", price: { 4: 1100000, 7: 1200000 }, photo: "img/dest-tuyhoa.jpg", img: "img/dest-tuyhoa.svg",
       note: "Qua đèo Cả, dừng chụp hình Đại Lãnh nếu bạn muốn." },
-    { id: "nt-pt",  to: "Phan Thiết",        km: "170-180 km", hours: "≈ 3,5 giờ", price: { 4: 1300000, 7: 1500000 }, photo: "img/dest-phanthiet.jpg", img: "img/dest-phanthiet.svg",
+    { id: "nt-pt",  to: "Phan Thiết",        km: "170-180 km", hours: "≈ 3,5 giờ", price: { 4: 1500000, 7: 1600000 }, photo: "img/dest-phanthiet.jpg", img: "img/dest-phanthiet.svg",
       note: "Thẳng tới Mũi Né, đồi cát và làng chài." },
-    { id: "nt-qn",  to: "Quy Nhơn",          km: "240-280 km", hours: "≈ 5 giờ",   price: { 4: 1800000, 7: 2000000 }, photo: "img/dest-quynhon.jpg", img: "img/dest-quynhon.svg",
+    { id: "nt-qn",  to: "Quy Nhơn",          km: "240-280 km", hours: "≈ 5 giờ",   price: { 4: 1700000, 7: 1800000 }, photo: "img/dest-quynhon.jpg", img: "img/dest-quynhon.svg",
       note: "Đường ven biển đẹp, ghé Kỳ Co hoặc Eo Gió trên đường." },
-    { id: "nt-vt",  to: "Vũng Tàu",          km: "320-360 km", hours: "≈ 7 giờ",   price: { 4: 2500000, 7: 2700000 }, photo: "img/dest-vungtau.jpg", img: "img/dest-vungtau.svg",
+    { id: "nt-vt",  to: "Vũng Tàu",          km: "320-360 km", hours: "≈ 7 giờ",   price: { 4: 2500000, 7: 2600000 }, photo: "img/dest-vungtau.jpg", img: "img/dest-vungtau.svg",
       note: "Chạy cao tốc, đi sáng tới nơi kịp ăn trưa hải sản." },
-    { id: "nt-sg",  to: "Sài Gòn",           km: "320-360 km", hours: "≈ 7 giờ",   price: { 4: 2500000, 7: 2700000 }, photo: "img/dest-saigon.jpg", img: "img/dest-saigon.svg",
+    { id: "nt-sg",  to: "Sài Gòn",           km: "320-360 km", hours: "≈ 7 giờ",   price: { 4: 2600000, 7: 2700000 }, photo: "img/dest-saigon.jpg", img: "img/dest-saigon.svg",
       note: "Tuyến dài nhất, khởi hành sớm hoặc chạy đêm theo yêu cầu." }
   ],
 

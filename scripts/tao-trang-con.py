@@ -198,12 +198,12 @@ pages["gioi-thieu.html"] = head("gioi-thieu.html",
 
 pages["bang-gia.html"] = head("bang-gia.html",
     "Bảng giá xe dịch vụ Nha Trang đi Đà Lạt, Cam Ranh, Phan Rang, Sài Gòn — Thiên Phú Travel",
-    "Giá trọn xe 4 chỗ và 7 chỗ từ Nha Trang: Đà Lạt 900.000, sân bay Cam Ranh 300.000, Phan Rang 850.000, Phan Thiết 1.300.000, Quy Nhơn 1.800.000, Sài Gòn 2.500.000. Đã gồm xăng, cầu đường, tài xế.") + f'''
+    "Giá trọn xe 4 chỗ và 7 chỗ từ Nha Trang: Đà Lạt 1.000.000, sân bay Cam Ranh 300.000, Cam Ranh và Ninh Hòa 450.000, Phan Rang 900.000, Phan Thiết 1.500.000, Quy Nhơn 1.700.000, Sài Gòn 2.600.000. Đã gồm xăng, cầu đường, tài xế.") + f'''
 <section class="phero phero--solo" aria-labelledby="pageTitle">
   <div class="wrap phero__grid">
     <div class="phero__copy">
       <p class="tag intro intro--1">Bảng giá</p>
-      <h1 id="pageTitle" class="split" data-split>Giá trọn xe, một chiều, công khai cho tám tuyến.</h1>
+      <h1 id="pageTitle" class="split" data-split>Giá trọn xe, một chiều, công khai cho mười tuyến.</h1>
       <p class="phero__lede intro intro--3">Đây là giá cho cả xe, không phải giá mỗi người. Đã gồm xăng, phí cầu đường và tài xế.</p>
       <div class="phero__actions intro intro--4">{btn_call()}{btn_line("Gửi yêu cầu báo giá", "dat-xe.html")}</div>
     </div>

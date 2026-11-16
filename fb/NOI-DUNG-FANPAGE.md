@@ -49,11 +49,14 @@ Trả lời tự động Messenger (Cài đặt → Tin nhắn → Trả lời t
 | Tên dịch vụ | Giá | Mô tả |
 |---|---|---|
 | Nha Trang - Sân bay Cam Ranh | Từ 300.000₫ | Xe 4 chỗ 300.000, xe 7 chỗ 350.000. Đón trả tận cổng, canh giờ bay. |
-| Nha Trang - Đà Lạt | Từ 900.000₫ | Xe 4 chỗ 900.000, xe 7 chỗ 1.000.000. Qua đèo Khánh Lê, 3,5 giờ. |
-| Nha Trang - Phan Rang / Tuy Hòa | Từ 850.000₫ | Xe 4 chỗ 850.000, xe 7 chỗ 950.000. |
-| Nha Trang - Phan Thiết, Mũi Né | Từ 1.300.000₫ | Xe 4 chỗ 1.300.000, xe 7 chỗ 1.500.000. |
-| Nha Trang - Quy Nhơn | Từ 1.800.000₫ | Xe 4 chỗ 1.800.000, xe 7 chỗ 2.000.000. |
-| Nha Trang - Vũng Tàu / Sài Gòn | Từ 2.500.000₫ | Xe 4 chỗ 2.500.000, xe 7 chỗ 2.700.000. |
+| Nha Trang - Đà Lạt | Từ 1.000.000₫ | Xe 4 chỗ 1.000.000, xe 7 chỗ 1.100.000. Qua đèo Khánh Lê, 3,5 giờ. |
+| Nha Trang - Cam Ranh / Ninh Hòa | Từ 450.000₫ | Xe 4 chỗ 450.000, xe 7 chỗ 500.000. |
+| Nha Trang - Phan Rang | Từ 900.000₫ | Xe 4 chỗ 900.000, xe 7 chỗ 1.000.000. |
+| Nha Trang - Tuy Hòa | Từ 1.100.000₫ | Xe 4 chỗ 1.100.000, xe 7 chỗ 1.200.000. |
+| Nha Trang - Phan Thiết, Mũi Né | Từ 1.500.000₫ | Xe 4 chỗ 1.500.000, xe 7 chỗ 1.600.000. |
+| Nha Trang - Quy Nhơn | Từ 1.700.000₫ | Xe 4 chỗ 1.700.000, xe 7 chỗ 1.800.000. |
+| Nha Trang - Vũng Tàu | Từ 2.500.000₫ | Xe 4 chỗ 2.500.000, xe 7 chỗ 2.600.000. |
+| Nha Trang - Sài Gòn | Từ 2.600.000₫ | Xe 4 chỗ 2.600.000, xe 7 chỗ 2.700.000. |
 | Thuê xe 16 chỗ, thuê nhiều ngày | Báo giá theo tuyến | Đoàn đông, tour nhiều ngày, xe và tài xế theo suốt. |
 
 ## 6. Ba bài đăng đầu tiên (đăng trước khi chạy quảng cáo)
@@ -64,7 +67,7 @@ Trả lời tự động Messenger (Cài đặt → Tin nhắn → Trả lời t
 
 Từ 2011, Thiên Phú chạy xe dịch vụ cho khách du lịch, gia đình và công ty. Xe 4-7-16 chỗ đời mới, tài xế quen đường, giá niêm yết rõ ràng.
 
-✅ Nha Trang - Đà Lạt từ 900.000₫
+✅ Nha Trang - Đà Lạt từ 1.000.000₫
 ✅ Nha Trang - Sân bay Cam Ranh từ 300.000₫
 ✅ Đi Phan Rang, Phan Thiết, Quy Nhơn, Vũng Tàu, Sài Gòn: xem bảng giá tại phucphucar.com/bang-gia
 
@@ -76,9 +79,9 @@ Từ 2011, Thiên Phú chạy xe dịch vụ cho khách du lịch, gia đình v�
 
 **Bài 2 - Tuyến Nha Trang Đà Lạt (ảnh img/dest-dalat.jpg)**
 
-🌸 NHA TRANG ĐI ĐÀ LẠT - XE RIÊNG CHỈ TỪ 900.000₫
+🌸 NHA TRANG ĐI ĐÀ LẠT - XE RIÊNG CHỈ TỪ 1.000.000₫
 
-3,5 giờ qua đèo Khánh Lê, dừng chụp hình thác, ghé cà phê giữa đường tùy bạn. Xe 4 chỗ 900.000₫, xe 7 chỗ 1.000.000₫ trọn gói, đã gồm xăng và cầu đường.
+3,5 giờ qua đèo Khánh Lê, dừng chụp hình thác, ghé cà phê giữa đường tùy bạn. Xe 4 chỗ 1.000.000₫, xe 7 chỗ 1.100.000₫ trọn gói, đã gồm xăng và cầu đường.
 
 Đặt tối hôm trước, sáng sớm xe đứng trước khách sạn.
 📞 0964 559 794 (Zalo / WhatsApp)

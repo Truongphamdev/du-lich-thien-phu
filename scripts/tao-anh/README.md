@@ -34,5 +34,5 @@ python3 scripts/tao-anh/compose.py out-sd img
 |---|---|---|
 | hero.jpg | Banner đầu trang | 21:9 |
 | car-4.jpg, car-7.jpg, car-16.jpg | Thẻ dòng xe | 16:9 |
-| dest-*.jpg (8 ảnh) | Thẻ điểm đến | 4:3 |
+| dest-*.jpg (10 ảnh) | Thẻ điểm đến | 4:3 |
 | gal-fleet, gal-airport, gal-interior, gal-dalat-road | Mục "Uy tín và an toàn" | 16:9 |
