@@ -85,9 +85,9 @@ Mỗi lúc chỉ nên chạy 1–2 quảng cáo để dễ so sánh.
 
 ### Quảng cáo 1 — Nha Trang đi Đà Lạt (chạy đầu tiên)
 
-🌸 NHA TRANG ĐI ĐÀ LẠT – XE RIÊNG CHỈ TỪ 1.000.000₫
+🌸 NHA TRANG ĐI ĐÀ LẠT – XE RIÊNG CHỈ TỪ 900.000₫
 
-Xe 4 chỗ 1.000.000₫, xe 7 chỗ 1.100.000₫ trọn gói, đã gồm xăng và cầu đường. Không ghép khách, không phụ thu.
+Xe 4 chỗ 900.000₫, xe 7 chỗ 1.000.000₫ trọn gói, đã gồm xăng và cầu đường. Không ghép khách, không phụ thu.
 
 Tài xế quen đèo Khánh Lê, 3,5 giờ tới nơi. Đón tận khách sạn, dừng chụp hình dọc đường tùy bạn.
 
@@ -118,6 +118,6 @@ Chào bạn! Thiên Phú Travel đây. Bạn cho mình biết: tuyến đi, ngà
 
 ### Mẫu trả lời khách
 
-- Khách hỏi giá: "Dạ tuyến [Nha Trang – Đà Lạt] xe [4 chỗ] trọn gói [1.000.000₫], đã gồm xăng cầu đường, đón tận nơi. Anh/chị đi ngày nào để mình giữ xe ạ?"
-- Khách chốt: "Dạ mình xác nhận: [ngày giờ], đón tại [địa chỉ], xe [4 chỗ], giá [1.000.000₫]. Tài xế sẽ gọi anh/chị trước 1 tiếng. Cảm ơn anh/chị!"
-- Khách im lặng sau 1 ngày: "Dạ anh/chị còn cần xe tuyến [Đà Lạt] không ạ? Thiên Phú vẫn giữ giá [1.000.000₫], nhắn mình bất cứ lúc nào nhé."
+- Khách hỏi giá: "Dạ tuyến [Nha Trang – Đà Lạt] xe [4 chỗ] trọn gói [900.000₫], đã gồm xăng cầu đường, đón tận nơi. Anh/chị đi ngày nào để mình giữ xe ạ?"
+- Khách chốt: "Dạ mình xác nhận: [ngày giờ], đón tại [địa chỉ], xe [4 chỗ], giá [900.000₫]. Tài xế sẽ gọi anh/chị trước 1 tiếng. Cảm ơn anh/chị!"
+- Khách im lặng sau 1 ngày: "Dạ anh/chị còn cần xe tuyến [Đà Lạt] không ạ? Thiên Phú vẫn giữ giá [900.000₫], nhắn mình bất cứ lúc nào nhé."

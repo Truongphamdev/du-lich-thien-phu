@@ -16,7 +16,7 @@ COPY = {
  "car-4":       ((1200, 675), "XE 4 CHỖ", "Sedan máy lạnh · 3 khách · từ 300.000đ"),
  "car-7":       ((1200, 675), "XE 7 CHỖ", "SUV gầm cao · 6 khách · từ 350.000đ"),
  "car-16":      ((1200, 675), "XE 16 CHỖ", "Đoàn đông, hành lý nhiều · liên hệ báo giá"),
- "dest-dalat":    ((1200, 900), "ĐÀ LẠT",          "Nha Trang – Đà Lạt · 140 km · từ 1.000.000đ"),
+ "dest-dalat":    ((1200, 900), "ĐÀ LẠT",          "Nha Trang – Đà Lạt · 140 km · từ 900.000đ"),
  "dest-camranh":  ((1200, 900), "SÂN BAY CAM RANH", "Nha Trang – Cam Ranh · 35 km · từ 300.000đ"),
  "dest-camranh-tp": ((1200, 900), "CAM RANH",       "Nha Trang – Cam Ranh · 60 km · từ 450.000đ"),   # nền: gal-airport
  "dest-ninhhoa":  ((1200, 900), "NINH HÒA",         "Nha Trang – Ninh Hòa · 35 km · từ 450.000đ"),   # nền: gal-nhatrang

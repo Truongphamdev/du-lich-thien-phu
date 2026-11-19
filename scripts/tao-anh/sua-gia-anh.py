@@ -18,7 +18,7 @@ MIN_KEEP = 10      # số pixel nền tối thiểu trong một hàng để lấ
 # tên ảnh: (vùng tìm chữ x0,y0,x1,y1 ; các đoạn chữ mới (text, màu) ; tùy chọn)
 #   shadow: nền sáng, chữ cũ có bóng tối phải xóa luôn.  maxw: chữ mới rộng tối đa so với chữ cũ.
 JOBS = {
-    "dest-dalat":   ((225, 236, 990, 290), [("140 km · Xe 4 chỗ 1.000.000đ · Xe 7 chỗ 1.100.000đ", WHITE)], {}),
+    "dest-dalat":   ((225, 236, 990, 290), [("140 km · Xe 4 chỗ 900.000đ · Xe 7 chỗ 1.000.000đ", WHITE)], {}),
     "dest-quynhon": ((55, 272, 925, 330),  [("260 km · Xe 4 chỗ 1.700.000đ · Xe 7 chỗ 1.800.000đ", WHITE)], {"shadow": True}),
     "dest-vungtau": ((215, 200, 965, 240), [("340 km · Xe 4 chỗ ", WHITE), ("2.500.000đ", SUN), (" · Xe 7 chỗ ", WHITE), ("2.600.000đ", SUN)], {"maxw": 0.98}),
     "dest-saigon":  ((45, 244, 795, 280),  [("340 km · Xe 4 chỗ 2.600.000đ · Xe 7 chỗ 2.700.000đ", WHITE)], {}),

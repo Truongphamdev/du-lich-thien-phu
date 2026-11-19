@@ -198,7 +198,7 @@ pages["gioi-thieu.html"] = head("gioi-thieu.html",
 
 pages["bang-gia.html"] = head("bang-gia.html",
     "Bảng giá xe dịch vụ Nha Trang đi Đà Lạt, Cam Ranh, Phan Rang, Sài Gòn — Thiên Phú Travel",
-    "Giá trọn xe 4 chỗ và 7 chỗ từ Nha Trang: Đà Lạt 1.000.000, sân bay Cam Ranh 300.000, Cam Ranh và Ninh Hòa 450.000, Phan Rang 900.000, Phan Thiết 1.500.000, Quy Nhơn 1.700.000, Sài Gòn 2.600.000. Đã gồm xăng, cầu đường, tài xế.") + f'''
+    "Giá trọn xe 4 chỗ và 7 chỗ từ Nha Trang: Đà Lạt 900.000, sân bay Cam Ranh 300.000, Cam Ranh và Ninh Hòa 450.000, Phan Rang 900.000, Phan Thiết 1.500.000, Quy Nhơn 1.700.000, Sài Gòn 2.600.000. Đã gồm xăng, cầu đường, tài xế.") + f'''
 <section class="phero phero--solo" aria-labelledby="pageTitle">
   <div class="wrap phero__grid">
     <div class="phero__copy">

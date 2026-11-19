@@ -46,7 +46,7 @@ window.TP_CONTENT = {
 
   /* Tuyến đường & giá trọn xe (VND). km: quãng đường, img: ảnh minh họa điểm đến. */
   routes: [
-    { id: "nt-dl",  to: "Đà Lạt",            km: "140-150 km", hours: "≈ 3,5 giờ", price: { 4: 1000000, 7: 1100000 }, photo: "img/dest-dalat.jpg", img: "img/dest-dalat.svg",     featured: true,
+    { id: "nt-dl",  to: "Đà Lạt",            km: "140-150 km", hours: "≈ 3,5 giờ", price: { 4: 900000,  7: 1000000 }, photo: "img/dest-dalat.jpg", img: "img/dest-dalat.svg",     featured: true,
       note: "Đường đèo Khánh Lê, tài xế quen tay. Lên tới nơi còn kịp cà phê chiều." },
     { id: "nt-cxr", to: "Sân bay Cam Ranh",  km: "35 km",        hours: "≈ 45 phút", price: { 4: 300000,  7: 350000 },  photo: "img/dest-camranh.jpg", img: "img/dest-camranh.svg",   featured: true,
       note: "Đón trả tận cổng, canh giờ bay. Máy bay trễ vẫn chờ." },
