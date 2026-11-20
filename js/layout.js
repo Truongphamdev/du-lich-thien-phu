@@ -67,7 +67,7 @@
   function footer() {
     var b = C.brand;
     var routes = C.routes.map(function (r) {
-      return '<li><a href="bang-gia.html#diem-den">Nha Trang đi ' + esc(r.to) + "</a></li>";
+      return '<li><a href="bang-gia.html#diem-den">' + esc((r.from || "Nha Trang") + " đi " + r.to) + "</a></li>";
     }).join("");
     return '<footer class="foot" id="chan-trang"><div class="wrap foot__grid">' +
       '<div class="foot__brand"><p class="logo__text">Thiên Phú <span>Travel</span></p>' +

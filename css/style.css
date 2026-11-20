@@ -262,9 +262,17 @@ body.is-ready .ring--phone{transition-delay:1.1s}body.is-ready .ring--wa{transit
 
 /* ---------------------------------------------------------------- hero */
 .hero{padding:clamp(48px,7vw,96px) 0 clamp(40px,6vw,72px)}
-.hero__grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);grid-template-areas:"copy quote" "banner banner";gap:40px 56px;align-items:center}
+.hero__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);grid-template-areas:"copy quote" "banner banner";gap:40px 48px;align-items:center}
 .hero__copy{grid-area:copy}
 .quote{grid-area:quote}
+/* Form đặt xe ở đầu trang (thay ô xem giá) */
+.hero__book{grid-area:quote}
+.hero__book>.core{padding:clamp(20px,2.4vw,28px)}
+.hero__book-title{color:#fff;font-size:clamp(1.2rem,2vw,1.45rem);font-weight:700;line-height:1.3}
+.hero__book-sub{margin:8px 0 16px;color:rgba(220,234,240,.8);font-size:.95rem;line-height:1.6}
+.hero__book .book__form--hero{padding:0;background:none;box-shadow:none;gap:12px 14px}
+/* Ô xem giá nằm dưới bảng giá */
+.quote--below{max-width:620px;margin:28px auto 0}
 .hero__banner{grid-area:banner;margin-top:24px}
 .hero__lede{margin-top:24px;font-size:1.1rem;color:var(--ink-2);max-width:52ch;line-height:1.7}
 
@@ -327,7 +335,7 @@ body.is-ready .ring--phone{transition-delay:1.1s}body.is-ready .ring--wa{transit
 .shot figcaption{padding:12px 14px 6px;color:var(--ink-2);font-weight:500;font-size:.9rem}
 
 /* điểm đến */
-.dests{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px}
+.dests{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-flow:dense;gap:22px}
 .dest{display:block;text-align:left;width:100%;color:var(--ink);transition:transform .7s var(--ease),box-shadow .7s var(--ease)}
 .dest:hover{transform:translateY(-6px);box-shadow:inset 0 0 0 1px var(--hair),var(--shadow-float)}
 .dest .core{overflow:hidden;display:flex;flex-direction:column;height:100%}

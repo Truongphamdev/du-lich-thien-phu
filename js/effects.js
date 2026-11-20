@@ -51,7 +51,7 @@
   function buildMarquee() {
     var track = $("#marqueeTrack"); if (!track || !C.routes) { return; }
     var items = C.routes.map(function (r) {
-      return '<span class="marquee__item">Nha Trang đi ' + r.to + '<small>từ ' + r.price[4].toLocaleString("vi-VN") + ' ₫</small></span>';
+      return '<span class="marquee__item">' + (r.from || "Nha Trang") + ' đi ' + r.to + '<small>từ ' + r.price[4].toLocaleString("vi-VN") + ' ₫</small></span>';
     }).join("");
     track.innerHTML = items + items; /* nhân đôi để chạy liền mạch */
   }

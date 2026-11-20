@@ -198,12 +198,12 @@ pages["gioi-thieu.html"] = head("gioi-thieu.html",
 
 pages["bang-gia.html"] = head("bang-gia.html",
     "Bảng giá xe dịch vụ Nha Trang đi Đà Lạt, Cam Ranh, Phan Rang, Sài Gòn — Thiên Phú Travel",
-    "Giá trọn xe 4 chỗ và 7 chỗ từ Nha Trang: Đà Lạt 900.000, sân bay Cam Ranh 300.000, Cam Ranh và Ninh Hòa 450.000, Phan Rang 900.000, Phan Thiết 1.500.000, Quy Nhơn 1.700.000, Sài Gòn 2.600.000. Đã gồm xăng, cầu đường, tài xế.") + f'''
+    "Giá trọn xe 4 chỗ và 7 chỗ từ Nha Trang: sân bay Cam Ranh và Cam Lâm 250.000, Cam Ranh 400.000, Ninh Hòa 450.000, Phan Rang 800.000, Đà Lạt 850.000, Phú Yên 1.000.000, Phan Thiết và Buôn Ma Thuột 1.400.000, Quy Nhơn 1.500.000, Sài Gòn 2.500.000. Đã gồm xăng, cầu đường, tài xế.") + f'''
 <section class="phero phero--solo" aria-labelledby="pageTitle">
   <div class="wrap phero__grid">
     <div class="phero__copy">
       <p class="tag intro intro--1">Bảng giá</p>
-      <h1 id="pageTitle" class="split" data-split>Giá trọn xe, một chiều, công khai cho mười tuyến.</h1>
+      <h1 id="pageTitle" class="split" data-split>Giá trọn xe, một chiều, công khai cho mười bốn tuyến.</h1>
       <p class="phero__lede intro intro--3">Đây là giá cho cả xe, không phải giá mỗi người. Đã gồm xăng, phí cầu đường và tài xế.</p>
       <div class="phero__actions intro intro--4">{btn_call()}{btn_line("Gửi yêu cầu báo giá", "dat-xe.html")}</div>
     </div>
@@ -220,7 +220,7 @@ pages["bang-gia.html"] = head("bang-gia.html",
       <div class="core">
         <table class="ledger__table">
           <caption class="sr-only">Bảng giá xe Thiên Phú Travel theo tuyến và loại xe</caption>
-          <thead><tr><th scope="col">Nha Trang đi</th><th scope="col">Quãng đường</th><th scope="col">Xe 4 chỗ</th><th scope="col">Xe 7 chỗ</th></tr></thead>
+          <thead><tr><th scope="col">Tuyến từ Nha Trang</th><th scope="col">Quãng đường</th><th scope="col">Xe 4 chỗ</th><th scope="col">Xe 7 chỗ</th></tr></thead>
           <tbody id="priceBody"></tbody>
           <tfoot><tr><td>Xe 16 chỗ<small>mọi tuyến</small></td><td></td><td class="num num--na" colspan="2">Báo giá theo đoàn và lịch trình</td></tr></tfoot>
         </table>
@@ -336,7 +336,7 @@ pages["lien-he.html"] = head("lien-he.html",
     <ul class="services" id="serviceList"></ul>
     <h3 class="area-title rv">Khu vực hoạt động</h3>
     <ul class="area rv">
-      <li>Nha Trang</li><li>Cam Ranh</li><li>Đà Lạt</li><li>Phan Rang</li><li>Tuy Hòa</li><li>Phan Thiết</li><li>Quy Nhơn</li><li>Vũng Tàu</li><li>Sài Gòn</li>
+      <li>Nha Trang</li><li>Cam Ranh</li><li>Đà Lạt</li><li>Phan Rang</li><li>Phú Yên</li><li>Cam Lâm</li><li>Ninh Hòa</li><li>Vạn Ninh</li><li>Buôn Ma Thuột</li><li>Phan Thiết</li><li>Quy Nhơn</li><li>Vũng Tàu</li><li>Sài Gòn</li>
     </ul>
   </div>
 </section>

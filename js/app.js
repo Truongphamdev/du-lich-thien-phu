@@ -40,6 +40,12 @@
 
   var TRIP_LABEL = { "1c": "một chiều", "kh": "khứ hồi trong ngày", "nn": "nhiều ngày, xe ở lại phục vụ" };
 
+  /** Tên ngắn của tuyến cho bảng, ô chọn, thẻ: "Đà Lạt" hoặc "Sân bay Cam Ranh → Đà Lạt". */
+  function routeLabel(r) { return r.from ? r.from + " → " + r.to : r.to; }
+
+  /** Tên đầy đủ để ghép câu: "Nha Trang đi Đà Lạt", "Sân bay Cam Ranh đi Đà Lạt". */
+  function routeFull(r) { return (r.from || "Nha Trang") + " đi " + r.to; }
+
   /* ---------------------------------------------------------------- render */
   function renderCars() {
     var host = $("#carGrid"); if (!host) { return; }
@@ -47,7 +53,7 @@
       var hasPrice = C.routes[0].price[c.id] !== undefined;
       var cheapest = hasPrice ? C.routes.reduce(function (m, r) { return r.price[c.id] < m.price[c.id] ? r : m; }, C.routes[0]) : null;
       var from = cheapest
-        ? 'Giá từ <b>' + vnd(cheapest.price[c.id]) + '</b> (Nha Trang đi ' + esc(cheapest.to) + ')'
+        ? 'Giá từ <b>' + vnd(cheapest.price[c.id]) + '</b> (' + esc(routeFull(cheapest)) + ')'
         : 'Giá theo tuyến, <a href="tel:' + esc(C.brand.hotlineTel[1]) + '"><b>gọi để báo giá</b></a>';
       return '<article class="car bezel rv"><div class="core">' +
         photoTag(c, esc(c.name), 480, 220) +
@@ -77,9 +83,9 @@
   function renderDests() {
     var host = $("#destGrid"); if (!host) { return; }
     host.innerHTML = C.routes.map(function (r) {
-      return '<button type="button" class="dest bezel rv' + (r.featured ? " dest--featured" : "") + '" data-route="' + esc(r.id) + '" aria-label="Xem giá Nha Trang đi ' + esc(r.to) + '"><div class="core">' +
+      return '<button type="button" class="dest bezel rv' + (r.featured ? " dest--featured" : "") + '" data-route="' + esc(r.id) + '" aria-label="Xem giá ' + esc(routeFull(r)) + '"><div class="core">' +
         photoTag(r, "", 400, 280) +
-        '<div class="dest__body"><h3>' + esc(r.to) + '</h3>' +
+        '<div class="dest__body"><h3>' + esc(routeLabel(r)) + '</h3>' +
         '<div class="dest__price"><small>Xe 4 chỗ</small><b>' + vnd(r.price[4]) + '</b></div>' +
         '<span class="dest__km">' + esc(r.km) + ', ' + esc(r.hours) + '</span>' +
         '<p class="dest__note">' + esc(r.note) + '</p></div>' +
@@ -100,7 +106,7 @@
   function renderPrices() {
     var body = $("#priceBody"); if (!body) { return; }
     body.innerHTML = C.routes.map(function (r) {
-      return "<tr><td>" + esc(r.to) + "<small>" + esc(r.hours) + "</small></td><td>" + esc(r.km) + "</td>" +
+      return "<tr><td>" + esc(routeLabel(r)) + "<small>" + esc(r.hours) + "</small></td><td>" + esc(r.km) + "</td>" +
         '<td class="num">' + vnd(r.price[4]) + '</td><td class="num num--7">' + vnd(r.price[7]) + "</td></tr>";
     }).join("");
   }
@@ -137,7 +143,7 @@
 
   function fillSelects() {
     var opts = C.routes.map(function (r) {
-      return '<option value="' + esc(r.id) + '">' + esc(r.to) + "</option>";
+      return '<option value="' + esc(r.id) + '">' + esc(routeLabel(r)) + "</option>";
     }).join("");
     ["#qRoute", "#bRoute"].forEach(function (s) { var el = $(s); if (el) { el.innerHTML = opts; } });
   }
@@ -188,7 +194,7 @@
     var isListed = d.car !== "16" && d.trip === "1c";
     var price = isListed ? vnd(r.price[d.car]) : "báo giá riêng";
     var dateVi = d.date ? d.date.split("-").reverse().join("/") : "";
-    return "Chào Thiên Phú Travel, mình muốn đặt " + carName + " Nha Trang đi " + r.to +
+    return "Chào Thiên Phú Travel, mình muốn đặt " + carName + " " + routeFull(r) +
       " (" + TRIP_LABEL[d.trip] + ") ngày " + dateVi + (d.time ? " lúc " + d.time : "") +
       (d.pax ? ", " + d.pax + " khách" : "") + (d.pickup ? ", đón tại " + d.pickup : "") +
       ". Giá trên web: " + price + "." +
@@ -267,7 +273,7 @@
     var r = findRoute(d.route);
     var isListed = d.car !== "16" && d.trip === "1c";
     return window.TP_MAIL.send({
-      name: d.name, phone: d.phone, route: "Nha Trang đi " + r.to, car: "Xe " + d.car + " chỗ",
+      name: d.name, phone: d.phone, route: routeFull(r), car: "Xe " + d.car + " chỗ",
       trip: TRIP_LABEL[d.trip], date: d.date, timePick: d.time, pax: d.pax, pickup: d.pickup,
       price: isListed ? vnd(r.price[d.car]) : "báo giá riêng", note: d.note, via: via, message: msg
     });
@@ -278,7 +284,7 @@
     if (!window.TP_TRACK) { return; }
     var r = findRoute(d.route);
     var isListed = d.car !== "16" && d.trip === "1c";
-    window.TP_TRACK.lead({ route: "Nha Trang đi " + r.to, car: "Xe " + d.car + " chỗ", value: isListed ? r.price[d.car] : 0 });
+    window.TP_TRACK.lead({ route: routeFull(r), car: "Xe " + d.car + " chỗ", value: isListed ? r.price[d.car] : 0 });
   }
 
   /** Khóa/mở các nút gửi trong lúc chờ phản hồi. */

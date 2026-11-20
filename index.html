@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="css/pages.css">
 </head>
 <body>
-<a class="skip" href="#bao-gia">Bỏ qua tới phần báo giá</a>
+<a class="skip" href="#dat-xe">Bỏ qua tới phần đặt xe</a>
 <div class="grain" aria-hidden="true"></div>
 <canvas class="snow" id="snow" aria-hidden="true"></canvas>
 <div class="ambient" aria-hidden="true"></div>
@@ -40,31 +40,28 @@
       <p class="hero__lede intro intro--3">Đón tận cửa, giá niêm yết, không ghép khách. Mười lăm năm chạy đèo Khánh Lê và đường ven biển.</p>
     </div>
 
-    <form class="quote bezel intro intro--5" id="bao-gia" aria-labelledby="quoteTitle">
+    <div class="hero__book bezel bezel--deep intro intro--5" id="dat-xe">
       <div class="core">
-        <h2 id="quoteTitle" class="quote__title">Xem giá ngay</h2>
-        <div class="quote__fields">
-          <label class="quote__field">
-            <span>Đi từ Nha Trang đến</span>
-            <select id="qRoute" name="route"></select>
-          </label>
-          <fieldset class="quote__field quote__cars">
-            <legend>Loại xe</legend>
-            <label><input type="radio" name="car" value="4" checked><span>4 chỗ</span></label>
-            <label><input type="radio" name="car" value="7"><span>7 chỗ</span></label>
-          </fieldset>
-        </div>
-        <div class="quote__result" aria-live="polite" aria-atomic="true">
-          <p class="quote__price"><span id="qPrice">900.000 ₫</span><small>trọn xe, một chiều</small></p>
-          <p class="quote__meta" id="qMeta">140-150 km, khoảng 3,5 giờ</p>
-        </div>
-        <div class="quote__actions">
-          <a class="btn btn--sun btn--lg" id="qCall" href="tel:+84964559794"><span>Gọi đặt xe</span><span class="btn__ic" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M5 3h3l1.5 4-2 1.2a9 9 0 0 0 4.3 4.3L13 10.5l4 1.5v3a2 2 0 0 1-2 2A13 13 0 0 1 3 5a2 2 0 0 1 2-2Z" fill="currentColor"/></svg></span></a>
-          <a class="btn btn--line btn--lg" id="qZalo" href="https://zalo.me/0964559794" target="_blank" rel="noopener"><span>Nhắn Zalo</span><span class="btn__ic" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 12 4M6 4h6v6"/></svg></span></a>
-        </div>
-        <p class="quote__note">Giá đã gồm xăng và cầu đường. Lễ, Tết hoặc khứ hồi gọi để chốt giá chính xác.</p>
+        <h2 id="bookTitle" class="hero__book-title">Đặt xe, Thiên Phú gọi lại trong 10 phút</h2>
+        <p class="hero__book-sub">Điền vài dòng rồi bấm gửi qua Zalo, WhatsApp hoặc email. Không cần đặt cọc.</p>
+    <form class="book__form book__form--hero" id="bookForm" novalidate>
+      <div class="field"><label for="bName">Tên của bạn</label><input id="bName" name="name" type="text" autocomplete="name" placeholder="Nguyễn Minh An" required><p class="field__err" data-err="name"></p></div>
+      <div class="field"><label for="bPhone">Số điện thoại</label><input id="bPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="0912 345 678" required><p class="field__err" data-err="phone"></p></div>
+      <div class="field"><label for="bRoute">Tuyến đi</label><select id="bRoute" name="route" required></select></div>
+      <div class="field"><label for="bCar">Loại xe</label><select id="bCar" name="car"><option value="4">Xe 4 chỗ</option><option value="7">Xe 7 chỗ</option><option value="16">Xe 16 chỗ, báo giá theo tuyến</option></select></div>
+      <div class="field"><label for="bDate">Ngày đi</label><input id="bDate" name="date" type="date" required><p class="field__err" data-err="date"></p></div>
+      <div class="field"><label for="bTime">Giờ đón</label><input id="bTime" name="time" type="time" value="08:00"></div>
+      <div class="field field--full"><label for="bNote">Ghi chú</label><textarea id="bNote" name="note" rows="2" placeholder="Điểm đón, số khách, có trẻ nhỏ, hành lý nhiều, muốn đi khứ hồi…"></textarea></div>
+      <div class="book__send">
+        <button class="btn btn--sun btn--lg" type="submit" data-via="zalo"><span>Gửi qua Zalo</span><span class="btn__ic" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 12 4M6 4h6v6"/></svg></span></button>
+        <button class="btn btn--line btn--lg" type="submit" data-via="whatsapp"><span>Gửi qua WhatsApp</span><span class="btn__ic" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 12 4M6 4h6v6"/></svg></span></button>
+        <button class="btn btn--line btn--lg" type="submit" data-via="email"><span>Gửi về email</span><span class="btn__ic" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 12 4M6 4h6v6"/></svg></span></button>
       </div>
+      <p class="book__ok" id="bookOk" role="status" hidden></p>
+      <p class="book__privacy">Số điện thoại chỉ dùng để liên hệ về chuyến này.</p>
     </form>
+      </div>
+    </div>
 
     <div class="hero__banner bezel intro intro--6" data-parallax data-mouse-parallax>
       <img src="img/hero.jpg" alt="Đội xe Thiên Phú Travel: xe 4 chỗ, 7 chỗ và 16 chỗ trên đường ven biển Nha Trang" width="1800" height="763" fetchpriority="high">
@@ -83,7 +80,7 @@
       <div class="core">
         <table class="ledger__table">
           <caption class="sr-only">Bảng giá xe Thiên Phú Travel theo tuyến và loại xe</caption>
-          <thead><tr><th scope="col">Nha Trang đi</th><th scope="col">Quãng đường</th><th scope="col">Xe 4 chỗ</th><th scope="col">Xe 7 chỗ</th></tr></thead>
+          <thead><tr><th scope="col">Tuyến từ Nha Trang</th><th scope="col">Quãng đường</th><th scope="col">Xe 4 chỗ</th><th scope="col">Xe 7 chỗ</th></tr></thead>
           <tbody id="priceBody"></tbody>
         </table>
         <div class="ledger__foot">
@@ -92,6 +89,31 @@
         </div>
       </div>
     </div>
+    <form class="quote quote--below bezel rv" id="bao-gia" aria-labelledby="quoteTitle">
+      <div class="core">
+        <h2 id="quoteTitle" class="quote__title">Xem giá ngay</h2>
+        <div class="quote__fields">
+          <label class="quote__field">
+            <span>Tuyến</span>
+            <select id="qRoute" name="route"></select>
+          </label>
+          <fieldset class="quote__field quote__cars">
+            <legend>Loại xe</legend>
+            <label><input type="radio" name="car" value="4" checked><span>4 chỗ</span></label>
+            <label><input type="radio" name="car" value="7"><span>7 chỗ</span></label>
+          </fieldset>
+        </div>
+        <div class="quote__result" aria-live="polite" aria-atomic="true">
+          <p class="quote__price"><span id="qPrice">400.000 ₫</span><small>trọn xe, một chiều</small></p>
+          <p class="quote__meta" id="qMeta">55-60 km, khoảng 1 giờ 15</p>
+        </div>
+        <div class="quote__actions">
+          <a class="btn btn--sun btn--lg" id="qCall" href="tel:+84964559794"><span>Gọi đặt xe</span><span class="btn__ic" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M5 3h3l1.5 4-2 1.2a9 9 0 0 0 4.3 4.3L13 10.5l4 1.5v3a2 2 0 0 1-2 2A13 13 0 0 1 3 5a2 2 0 0 1 2-2Z" fill="currentColor"/></svg></span></a>
+          <a class="btn btn--line btn--lg" id="qZalo" href="https://zalo.me/0964559794" target="_blank" rel="noopener"><span>Nhắn Zalo</span><span class="btn__ic" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 12 4M6 4h6v6"/></svg></span></a>
+        </div>
+        <p class="quote__note">Giá đã gồm xăng và cầu đường. Lễ, Tết hoặc khứ hồi gọi để chốt giá chính xác.</p>
+      </div>
+    </form>
   </div>
 </section>
 
@@ -132,7 +154,7 @@
 <section class="sec sec--tint" id="diem-den" aria-labelledby="destTitle">
   <div class="wrap">
     <div class="sec__head rv">
-      <h2 id="destTitle" data-split-scroll>Mười điểm đến từ Nha Trang</h2>
+      <h2 id="destTitle" data-split-scroll>Mười bốn tuyến từ Nha Trang</h2>
       <p>Mỗi thẻ ghi sẵn quãng đường và giá xe 4 chỗ. Bấm vào thẻ để xem giá cả hai loại xe ở ô báo giá.</p>
     </div>
     <div class="dests" id="destGrid"></div>
@@ -162,42 +184,6 @@
   </div>
 </section>
 
-<!-- ============ YÊU CẦU BÁO GIÁ ============ -->
-<section class="sec" id="dat-xe" aria-labelledby="bookTitle">
-  <div class="wrap">
-    <div class="book bezel bezel--deep rv">
-      <div class="core book__grid">
-        <div class="book__copy">
-          <p class="tag tag--light">Đặt xe</p>
-          <h2 id="bookTitle" data-split-scroll>Gửi yêu cầu, Thiên Phú gọi lại trong 10 phút</h2>
-          <p>Điền vài dòng, tin nhắn sẽ được soạn sẵn để bạn gửi qua Zalo hoặc WhatsApp. Không cần đặt cọc.</p>
-          <ol class="how">
-            <li><b>Bạn gửi yêu cầu</b><span>tuyến, loại xe, ngày giờ và số điện thoại.</span></li>
-            <li><b>Thiên Phú gọi xác nhận</b><span>chốt giá, điểm đón và giờ đón.</span></li>
-            <li><b>Tài xế đón tận nơi</b><span>gọi trước 15 phút khi sắp tới.</span></li>
-          </ol>
-        </div>
-        <form class="book__form" id="bookForm" novalidate>
-          <div class="field"><label for="bName">Tên của bạn</label><input id="bName" name="name" type="text" autocomplete="name" placeholder="Nguyễn Minh An" required><p class="field__err" data-err="name"></p></div>
-          <div class="field"><label for="bPhone">Số điện thoại</label><input id="bPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="0912 345 678" required><p class="field__err" data-err="phone"></p></div>
-          <div class="field"><label for="bRoute">Tuyến đi</label><select id="bRoute" name="route" required></select></div>
-          <div class="field"><label for="bCar">Loại xe</label><select id="bCar" name="car"><option value="4">Xe 4 chỗ</option><option value="7">Xe 7 chỗ</option><option value="16">Xe 16 chỗ, báo giá theo tuyến</option></select></div>
-          <div class="field"><label for="bDate">Ngày đi</label><input id="bDate" name="date" type="date" required><p class="field__err" data-err="date"></p></div>
-          <div class="field"><label for="bTime">Giờ đón</label><input id="bTime" name="time" type="time" value="08:00"></div>
-          <div class="field field--full"><label for="bNote">Ghi chú</label><textarea id="bNote" name="note" rows="2" placeholder="Điểm đón, số khách, có trẻ nhỏ, hành lý nhiều, muốn đi khứ hồi…"></textarea></div>
-          <div class="book__send">
-            <button class="btn btn--sun btn--lg" type="submit" data-via="zalo"><span>Gửi qua Zalo</span><span class="btn__ic" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 12 4M6 4h6v6"/></svg></span></button>
-            <button class="btn btn--line btn--lg" type="submit" data-via="whatsapp"><span>Gửi qua WhatsApp</span><span class="btn__ic" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 12 4M6 4h6v6"/></svg></span></button>
-            <button class="btn btn--line btn--lg" type="submit" data-via="email"><span>Gửi về email</span><span class="btn__ic" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 12 4M6 4h6v6"/></svg></span></button>
-          </div>
-          <p class="book__ok" id="bookOk" role="status" hidden></p>
-          <p class="book__privacy">Số điện thoại chỉ dùng để liên hệ về chuyến này.</p>
-        </form>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ============ HỎI ĐÁP ============ -->
 <section class="sec sec--tint" id="hoi-dap" aria-labelledby="faqTitle">
   <div class="wrap">
@@ -213,7 +199,7 @@
 <div id="siteDock"></div>
 
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"TaxiService","name":"Thiên Phú Travel","description":"Xe dịch vụ du lịch Nha Trang đi Đà Lạt, sân bay Cam Ranh và các tỉnh miền Đông, miền Nam.","foundingDate":"2011","areaServed":["Nha Trang","Đà Lạt","Cam Ranh","Ninh Hòa","Phan Rang","Tuy Hòa","Phan Thiết","Quy Nhơn","Vũng Tàu","TP. Hồ Chí Minh"],"telephone":"+84964559794","email":"phanson25042102@gmail.com","sameAs":["https://www.facebook.com/share/19cJy7iHVu/?mibextid=wwXIfr"],"openingHours":"Mo-Su 00:00-24:00","priceRange":"300.000₫ - 2.700.000₫"}
+{"@context":"https://schema.org","@type":"TaxiService","name":"Thiên Phú Travel","description":"Xe dịch vụ du lịch Nha Trang đi Đà Lạt, sân bay Cam Ranh và các tỉnh miền Đông, miền Nam.","foundingDate":"2011","areaServed":["Nha Trang","Đà Lạt","Cam Ranh","Cam Lâm","Ninh Hòa","Vạn Ninh","Buôn Ma Thuột","Phú Yên","Phan Rang","Tuy Hòa","Phan Thiết","Quy Nhơn","Vũng Tàu","TP. Hồ Chí Minh"],"telephone":"+84964559794","email":"phanson25042102@gmail.com","sameAs":["https://www.facebook.com/share/19cJy7iHVu/?mibextid=wwXIfr"],"openingHours":"Mo-Su 00:00-24:00","priceRange":"250.000₫ - 2.600.000₫"}
 </script>
 <script src="js/content.js"></script>
 <script src="js/track.js"></script>
